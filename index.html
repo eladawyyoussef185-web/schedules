@@ -97,6 +97,64 @@
             box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
         }
 
+        /* أزرار مشاركة وبار كود الموقع الرئيسي */
+        .main-action-btns {
+            display: flex;
+            gap: 10px;
+            width: 100%;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 11px 14px;
+            border-radius: 12px;
+            border: none;
+            font-weight: 700;
+            font-size: 0.88rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: all 0.2s ease;
+        }
+
+        .btn-main-share {
+            background-color: #4f46e5;
+            color: #fff;
+        }
+
+        .btn-main-share:hover {
+            background-color: #4338ca;
+        }
+
+        .btn-main-qr {
+            background-color: #0d9488;
+            color: #fff;
+        }
+
+        .btn-main-qr:hover {
+            background-color: #0f766e;
+        }
+
+        .btn-share {
+            background-color: var(--accent);
+            color: #fff;
+        }
+
+        .btn-share:hover {
+            background-color: var(--accent-hover);
+        }
+
+        .btn-qr {
+            background-color: #059669;
+            color: #fff;
+        }
+
+        .btn-qr:hover {
+            background-color: #047857;
+        }
+
         .schedule-display {
             margin-top: 10px;
             display: none;
@@ -146,44 +204,10 @@
             border: 1px solid #e2e8f0;
         }
 
-        /* أزرار المشاركة والـ QR */
         .action-btns {
             display: flex;
             gap: 10px;
             width: 100%;
-        }
-
-        .btn {
-            flex: 1;
-            padding: 11px 14px;
-            border-radius: 12px;
-            border: none;
-            font-weight: 700;
-            font-size: 0.9rem;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            transition: all 0.2s ease;
-        }
-
-        .btn-share {
-            background-color: var(--accent);
-            color: #fff;
-        }
-
-        .btn-share:hover {
-            background-color: var(--accent-hover);
-        }
-
-        .btn-qr {
-            background-color: #059669;
-            color: #fff;
-        }
-
-        .btn-qr:hover {
-            background-color: #047857;
         }
 
         /* نافذة الـ QR Code Modal */
@@ -298,6 +322,12 @@
             </select>
         </div>
 
+        <!-- أزرار مشاركة وبار كود الموقع الرئيسي -->
+        <div class="main-action-btns">
+            <button class="btn btn-main-share" onclick="shareMainWebsite()"><i class="fas fa-globe"></i> مشاركة الموقع</button>
+            <button class="btn btn-main-qr" onclick="generateMainQR()"><i class="fas fa-qrcode"></i> باركود الموقع</button>
+        </div>
+
         <!-- عرض الجدول أو الرسالة -->
         <div id="schedule-box" class="schedule-display">
             <!-- كارت "قريباً" -->
@@ -310,10 +340,10 @@
             <!-- صورة الجدول -->
             <img id="schedule-img" class="schedule-img" src="" alt="جدول الفصل">
 
-            <!-- أزرار الـ QR والمشاركة -->
+            <!-- أزرار الجدول المحدد -->
             <div class="action-btns">
                 <button class="btn btn-share" onclick="shareClassLink()"><i class="fas fa-share-alt"></i> مشاركة الجدول</button>
-                <button class="btn btn-qr" onclick="generateQR()"><i class="fas fa-qrcode"></i> رمز QR</button>
+                <button class="btn btn-qr" onclick="generateQR()"><i class="fas fa-qrcode"></i> باركود الجدول</button>
             </div>
         </div>
     </div>
@@ -321,7 +351,7 @@
     <!-- نافذة عرض الـ QR Code -->
     <div id="qr-modal" class="modal">
         <div class="modal-content">
-            <h3 id="qr-title">رمز QR للجدول</h3>
+            <h3 id="qr-title">رمز QR</h3>
             <div id="qrcode"></div>
             <button class="close-btn" onclick="closeQRModal()">إغلاق</button>
         </div>
@@ -344,6 +374,44 @@
             "أول (1)", "ثاني (2)", "ثالث (3)", "رابع (4)",
             "خامس (5)", "سادس (6)", "سابع (7)", "ثامن (8)"
         ];
+
+        function getMainURL() {
+            return window.location.href.split('?')[0];
+        }
+
+        function shareMainWebsite() {
+            const mainURL = getMainURL();
+            if (navigator.share) {
+                navigator.share({
+                    title: `موقع جداول الحصص المدرسية`,
+                    text: `تابع جداول الحصص المدرسية من هنا:`,
+                    url: mainURL
+                }).catch(() => {});
+            } else {
+                navigator.clipboard.writeText(mainURL).then(() => {
+                    alert("تم نسخ رابط الموقع الرئيسي بنجاح! يمكنك مشاركته الآن.");
+                });
+            }
+        }
+
+        function generateMainQR() {
+            const mainURL = getMainURL();
+            const qrContainer = document.getElementById('qrcode');
+            
+            qrContainer.innerHTML = '';
+            document.getElementById('qr-title').innerText = `باركود الموقع الرئيسي 🌐`;
+
+            new QRCode(qrContainer, {
+                text: mainURL,
+                width: 180,
+                height: 180,
+                colorDark : "#0f172a",
+                colorLight : "#ffffff",
+                correctLevel : QRCode.CorrectLevel.H
+            });
+
+            document.getElementById('qr-modal').style.display = 'flex';
+        }
 
         function updateClassOptions(selectedClassKey = null) {
             const grade = document.getElementById('grade-select').value;
@@ -404,8 +472,8 @@
 
         function getClassURL() {
             const classKey = document.getElementById('class-select').value;
-            const baseURL = window.location.href.split('?')[0];
-            return `${baseURL}?class=${classKey}`;
+            const mainURL = getMainURL();
+            return `${mainURL}?class=${classKey}`;
         }
 
         function shareClassLink() {
@@ -433,7 +501,7 @@
             const qrContainer = document.getElementById('qrcode');
             
             qrContainer.innerHTML = '';
-            document.getElementById('qr-title').innerText = `رمز QR - ${selectedText}`;
+            document.getElementById('qr-title').innerText = `باركود جدول - ${selectedText}`;
 
             new QRCode(qrContainer, {
                 text: shareURL,
@@ -451,7 +519,6 @@
             document.getElementById('qr-modal').style.display = 'none';
         }
 
-        // فحص الرابط التلقائي عند الفتح (Deep Link)
         window.onload = function() {
             const urlParams = new URLSearchParams(window.location.search);
             const classParam = urlParams.get('class');
