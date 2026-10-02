@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>جداول الحصص المدرسية</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #0f172a;
+            --accent: #2563eb;
+            --accent-hover: #1d4ed8;
+            --bg: #f8fafc;
+            --card-bg: #ffffff;
+            --text: #1e293b;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Cairo', sans-serif; }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 15px;
+        }
+
+        header {
+            text-align: center;
+            margin: 15px 0 20px;
+        }
+
+        header .logo-icon {
+            font-size: 2.5rem;
+            color: var(--accent);
+            margin-bottom: 8px;
+        }
+
+        header h1 {
+            color: var(--primary);
+            font-size: 1.6rem;
+            font-weight: 900;
+        }
+
+        header p {
+            color: #64748b;
+            font-size: 0.9rem;
+            margin-top: 4px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 480px;
+            background: var(--card-bg);
+            padding: 20px;
+            border-radius: 18px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.06);
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        label {
+            font-weight: 700;
+            font-size: 0.95rem;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            font-size: 1rem;
+            outline: none;
+            background-color: #fff;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            color: var(--text);
+        }
+
+        select:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+        }
+
+        .schedule-display {
+            margin-top: 10px;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .placeholder-box {
+            width: 100%;
+            padding: 35px 20px;
+            border-radius: 14px;
+            border: 2px dashed #cbd5e1;
+            background: #f1f5f9;
+            text-align: center;
+            color: #475569;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .placeholder-box i {
+            font-size: 2.5rem;
+            color: var(--accent);
+        }
+
+        .placeholder-box h3 {
+            font-size: 1.15rem;
+            font-weight: 800;
+            color: var(--primary);
+        }
+
+        .placeholder-box p {
+            font-size: 0.9rem;
+            color: #64748b;
+        }
+
+        .schedule-img {
+            width: 100%;
+            height: auto;
+            border-radius: 14px;
+            display: none;
+            object-fit: contain;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+            border: 1px solid #e2e8f0;
+        }
+
+        footer {
+            margin-top: auto;
+            padding: 25px 10px 10px;
+            text-align: center;
+            font-size: 0.88rem;
+            color: #64748b;
+            line-height: 1.6;
+        }
+
+        footer .dev {
+            color: var(--primary);
+            font-weight: 800;
+        }
+
+        footer .class-info {
+            color: var(--accent);
+            font-weight: 700;
+        }
+
+        footer .sig {
+            font-family: monospace;
+            font-weight: 900;
+            color: var(--accent);
+            font-size: 1rem;
+            letter-spacing: 1px;
+            margin-top: 4px;
+            display: block;
+            text-transform: uppercase;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo-icon"><i class="fas fa-calendar-alt"></i></div>
+        <h1>جدول الحصص المدرسي</h1>
+        <p>اختر الصف والفصل لعرض الجدول</p>
+    </header>
+
+    <div class="container">
+        <!-- اختيار الصف -->
+        <div class="form-group">
+            <label for="grade-select"><i class="fas fa-layer-group"></i> الصف الدراسي:</label>
+            <select id="grade-select" onchange="updateClassOptions()">
+                <option value="">-- اختر الصف --</option>
+                <option value="1">الصف الأول الثانوي</option>
+                <option value="2">الصف الثاني الثانوي</option>
+            </select>
+        </div>
+
+        <!-- اختيار الفصل -->
+        <div class="form-group">
+            <label for="class-select"><i class="fas fa-users"></i> الفصل:</label>
+            <select id="class-select" onchange="showSchedule()" disabled>
+                <option value="">-- اختر الصف أولاً --</option>
+            </select>
+        </div>
+
+        <!-- عرض الجدول أو الرسالة -->
+        <div id="schedule-box" class="schedule-display">
+            <!-- كارت "قريباً" -->
+            <div id="coming-soon" class="placeholder-box">
+                <i class="fas fa-clock"></i>
+                <h3 id="class-title">فصل ...</h3>
+                <p>قريباً... سيتم رفع الجدول فور صدوره ⏳</p>
+            </div>
+
+            <!-- صورة الجدول -->
+            <img id="schedule-img" class="schedule-img" src="" alt="جدول الفصل">
+        </div>
+    </div>
+
+    <footer>
+        تصميم وتطوير الطالب: <span class="dev">يوسف أحمد محمود</span> <span class="class-info">(2/5)</span> © 2026<br>
+        <span class="sig">jou</span>
+    </footer>
+
+    <script>
+        // داتابيز مسارات الصور (جاهزة لحين رفع الصور)
+        const schedules = {
+            // الصف الأول (1/1 إلى 1/8)
+            "1-1": "", "1-2": "", "1-3": "", "1-4": "",
+            "1-5": "", "1-6": "", "1-7": "", "1-8": "",
+
+            // الصف الثاني (2/1 إلى 2/8)
+            "2-1": "", "2-2": "", "2-3": "", "2-4": "",
+            "2-5": "", "2-6": "", "2-7": "", "2-8": ""
+        };
+
+        const classNames = [
+            "أول (1)", "ثاني (2)", "ثالث (3)", "رابع (4)",
+            "خامس (5)", "سادس (6)", "سابع (7)", "ثامن (8)"
+        ];
+
+        function updateClassOptions() {
+            const grade = document.getElementById('grade-select').value;
+            const classSelect = document.getElementById('class-select');
+            const scheduleBox = document.getElementById('schedule-box');
+
+            classSelect.innerHTML = '<option value="">-- اختر الفصل --</option>';
+            scheduleBox.style.display = 'none';
+
+            if (!grade) {
+                classSelect.disabled = true;
+                return;
+            }
+
+            classSelect.disabled = false;
+
+            classNames.forEach((name, index) => {
+                const opt = document.createElement('option');
+                opt.value = `${grade}-${index + 1}`;
+                opt.textContent = `فصل ${name}`;
+                classSelect.appendChild(opt);
+            });
+        }
+
+        function showSchedule() {
+            const classKey = document.getElementById('class-select').value;
+            const classSelect = document.getElementById('class-select');
+            const scheduleBox = document.getElementById('schedule-box');
+            const comingSoonBox = document.getElementById('coming-soon');
+            const scheduleImg = document.getElementById('schedule-img');
+            const classTitle = document.getElementById('class-title');
+
+            if (!classKey) {
+                scheduleBox.style.display = 'none';
+                return;
+            }
+
+            const selectedText = classSelect.options[classSelect.selectedIndex].text;
+            const gradeText = document.getElementById('grade-select').value == "1" ? "أولى" : "ثانية";
+
+            scheduleBox.style.display = 'flex';
+
+            if (schedules[classKey] && schedules[classKey] !== "") {
+                comingSoonBox.style.display = 'none';
+                scheduleImg.src = schedules[classKey];
+                scheduleImg.style.display = 'block';
+            } else {
+                scheduleImg.style.display = 'none';
+                comingSoonBox.style.display = 'flex';
+                classTitle.innerText = `جدول ${gradeText} - ${selectedText}`;
+            }
+        }
+    </script>
+</body>
+</html>
