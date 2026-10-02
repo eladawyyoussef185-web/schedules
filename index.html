@@ -6,6 +6,7 @@
     <title>جداول الحصص المدرسية</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     <style>
         :root {
             --primary: #0f172a;
@@ -145,6 +146,95 @@
             border: 1px solid #e2e8f0;
         }
 
+        /* أزرار المشاركة والـ QR */
+        .action-btns {
+            display: flex;
+            gap: 10px;
+            width: 100%;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 11px 14px;
+            border-radius: 12px;
+            border: none;
+            font-weight: 700;
+            font-size: 0.9rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: all 0.2s ease;
+        }
+
+        .btn-share {
+            background-color: var(--accent);
+            color: #fff;
+        }
+
+        .btn-share:hover {
+            background-color: var(--accent-hover);
+        }
+
+        .btn-qr {
+            background-color: #059669;
+            color: #fff;
+        }
+
+        .btn-qr:hover {
+            background-color: #047857;
+        }
+
+        /* نافذة الـ QR Code Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(4px);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .modal-content {
+            background: #fff;
+            padding: 25px;
+            border-radius: 20px;
+            text-align: center;
+            max-width: 320px;
+            width: 100%;
+            box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            position: relative;
+        }
+
+        .modal-content h3 {
+            font-size: 1.1rem;
+            color: var(--primary);
+        }
+
+        #qrcode img {
+            margin: 0 auto;
+            border: 8px solid #f8fafc;
+            border-radius: 12px;
+        }
+
+        .close-btn {
+            background: #ef4444;
+            color: #fff;
+            border: none;
+            padding: 8px 18px;
+            border-radius: 10px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
         footer {
             margin-top: auto;
             padding: 25px 10px 10px;
@@ -219,6 +309,21 @@
 
             <!-- صورة الجدول -->
             <img id="schedule-img" class="schedule-img" src="" alt="جدول الفصل">
+
+            <!-- أزرار الـ QR والمشاركة -->
+            <div class="action-btns">
+                <button class="btn btn-share" onclick="shareClassLink()"><i class="fas fa-share-alt"></i> مشاركة الجدول</button>
+                <button class="btn btn-qr" onclick="generateQR()"><i class="fas fa-qrcode"></i> رمز QR</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- نافذة عرض الـ QR Code -->
+    <div id="qr-modal" class="modal">
+        <div class="modal-content">
+            <h3 id="qr-title">رمز QR للجدول</h3>
+            <div id="qrcode"></div>
+            <button class="close-btn" onclick="closeQRModal()">إغلاق</button>
         </div>
     </div>
 
@@ -228,13 +333,9 @@
     </footer>
 
     <script>
-        // داتابيز مسارات الصور (جاهزة لحين رفع الصور)
         const schedules = {
-            // الصف الأول (1/1 إلى 1/8)
             "1-1": "", "1-2": "", "1-3": "", "1-4": "",
             "1-5": "", "1-6": "", "1-7": "", "1-8": "",
-
-            // الصف الثاني (2/1 إلى 2/8)
             "2-1": "", "2-2": "", "2-3": "", "2-4": "",
             "2-5": "", "2-6": "", "2-7": "", "2-8": ""
         };
@@ -244,7 +345,7 @@
             "خامس (5)", "سادس (6)", "سابع (7)", "ثامن (8)"
         ];
 
-        function updateClassOptions() {
+        function updateClassOptions(selectedClassKey = null) {
             const grade = document.getElementById('grade-select').value;
             const classSelect = document.getElementById('class-select');
             const scheduleBox = document.getElementById('schedule-box');
@@ -265,6 +366,11 @@
                 opt.textContent = `فصل ${name}`;
                 classSelect.appendChild(opt);
             });
+
+            if (selectedClassKey) {
+                classSelect.value = selectedClassKey;
+                showSchedule();
+            }
         }
 
         function showSchedule() {
@@ -295,6 +401,69 @@
                 classTitle.innerText = `جدول ${gradeText} - ${selectedText}`;
             }
         }
+
+        function getClassURL() {
+            const classKey = document.getElementById('class-select').value;
+            const baseURL = window.location.href.split('?')[0];
+            return `${baseURL}?class=${classKey}`;
+        }
+
+        function shareClassLink() {
+            const shareURL = getClassURL();
+            const classSelect = document.getElementById('class-select');
+            const selectedText = classSelect.options[classSelect.selectedIndex].text;
+
+            if (navigator.share) {
+                navigator.share({
+                    title: `جدول ${selectedText}`,
+                    text: `شاهد جدول ${selectedText} المدرسي:`,
+                    url: shareURL
+                }).catch(() => {});
+            } else {
+                navigator.clipboard.writeText(shareURL).then(() => {
+                    alert("تم نسخ رابط الفصل بنجاح! يمكنك مشاركته الآن.");
+                });
+            }
+        }
+
+        function generateQR() {
+            const shareURL = getClassURL();
+            const classSelect = document.getElementById('class-select');
+            const selectedText = classSelect.options[classSelect.selectedIndex].text;
+            const qrContainer = document.getElementById('qrcode');
+            
+            qrContainer.innerHTML = '';
+            document.getElementById('qr-title').innerText = `رمز QR - ${selectedText}`;
+
+            new QRCode(qrContainer, {
+                text: shareURL,
+                width: 180,
+                height: 180,
+                colorDark : "#0f172a",
+                colorLight : "#ffffff",
+                correctLevel : QRCode.CorrectLevel.H
+            });
+
+            document.getElementById('qr-modal').style.display = 'flex';
+        }
+
+        function closeQRModal() {
+            document.getElementById('qr-modal').style.display = 'none';
+        }
+
+        // فحص الرابط التلقائي عند الفتح (Deep Link)
+        window.onload = function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const classParam = urlParams.get('class');
+
+            if (classParam) {
+                const grade = classParam.split('-')[0];
+                if (grade === "1" || grade === "2") {
+                    document.getElementById('grade-select').value = grade;
+                    updateClassOptions(classParam);
+                }
+            }
+        };
     </script>
 </body>
 </html>
