@@ -20,10 +20,10 @@
             --accent-cyan: #06b6d4;
             --text-light: #f8fafc;
             --text-muted: #94a3b8;
-            --card-bg: rgba(30, 41, 59, 0.7);
+            --card-bg: rgba(30, 41, 59, 0.75);
             --card-border: rgba(255, 255, 255, 0.1);
             --radius-xl: 20px;
-            --radius-lg: 12px;
+            --radius-lg: 14px;
             --shadow-glow: 0 10px 30px rgba(59, 130, 246, 0.2);
             --font-family: 'Cairo', sans-serif;
         }
@@ -43,13 +43,13 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 20px 15px;
+            padding: 25px 15px;
             overflow-x: hidden;
         }
 
         .container {
             width: 100%;
-            max-width: 1200px;
+            max-width: 1280px;
             margin: 0 auto;
         }
 
@@ -58,11 +58,11 @@
            ========================================================= */
         header {
             width: 100%;
-            background: rgba(28, 37, 65, 0.8);
-            backdrop-filter: blur(12px);
+            background: rgba(28, 37, 65, 0.85);
+            backdrop-filter: blur(14px);
             border: 1px solid var(--card-border);
             border-radius: var(--radius-xl);
-            padding: 25px 30px;
+            padding: 25px 35px;
             margin-bottom: 25px;
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
             display: flex;
@@ -75,31 +75,31 @@
         .school-brand {
             display: flex;
             align-items: center;
-            gap: 18px;
+            gap: 20px;
         }
 
         .school-logo {
-            width: 65px;
-            height: 65px;
+            width: 70px;
+            height: 70px;
             background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan));
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 2rem;
+            font-size: 2.2rem;
             color: #fff;
             box-shadow: var(--shadow-glow);
         }
 
         .school-info h1 {
-            font-size: 1.6rem;
+            font-size: 1.7rem;
             font-weight: 900;
             color: var(--text-light);
-            line-height: 1.2;
+            line-height: 1.3;
         }
 
         .school-info p {
-            font-size: 0.95rem;
+            font-size: 1rem;
             color: var(--accent-gold);
             font-weight: 700;
             margin-top: 4px;
@@ -108,15 +108,15 @@
         .principal-badge {
             background: rgba(245, 158, 11, 0.1);
             border: 1px solid rgba(245, 158, 11, 0.3);
-            padding: 10px 20px;
+            padding: 12px 22px;
             border-radius: var(--radius-lg);
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 14px;
         }
 
         .principal-badge i {
-            font-size: 1.4rem;
+            font-size: 1.5rem;
             color: var(--accent-gold);
         }
 
@@ -131,30 +131,31 @@
         }
 
         .principal-text strong {
-            font-size: 1.05rem;
+            font-size: 1.1rem;
             color: var(--text-light);
             font-weight: 800;
         }
 
         /* =========================================================
-           3. شريط التنقل وتصفية الفصول (Filter Controls)
+           3. لوحة تصفية الفصول (Class Filter Controls)
            ========================================================= */
         .controls-panel {
             width: 100%;
             background: var(--card-bg);
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(12px);
             border: 1px solid var(--card-border);
             border-radius: var(--radius-xl);
-            padding: 20px;
-            margin-bottom: 30px;
+            padding: 22px;
+            margin-bottom: 25px;
             display: flex;
             flex-direction: column;
             gap: 15px;
             align-items: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
         }
 
         .panel-title {
-            font-size: 1.2rem;
+            font-size: 1.25rem;
             font-weight: 800;
             color: var(--accent-cyan);
             display: flex;
@@ -171,7 +172,7 @@
         }
 
         .class-btn {
-            background: rgba(15, 23, 42, 0.6);
+            background: rgba(15, 23, 42, 0.7);
             color: var(--text-light);
             border: 1px solid var(--card-border);
             padding: 10px 22px;
@@ -188,7 +189,7 @@
         .class-btn:hover {
             border-color: var(--accent-blue);
             transform: translateY(-2px);
-            background: rgba(59, 130, 246, 0.2);
+            background: rgba(59, 130, 246, 0.25);
         }
 
         .class-btn.active {
@@ -199,35 +200,68 @@
         }
 
         /* =========================================================
-           4. عرض الجداول والمواد (Timetable Grid Display)
+           4. إعلانات المدرسة والتنبيهات (Notice Board)
+           ========================================================= */
+        .notice-board {
+            width: 100%;
+            background: rgba(245, 158, 11, 0.08);
+            border: 1px solid rgba(245, 158, 11, 0.25);
+            border-radius: var(--radius-xl);
+            padding: 20px 25px;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .notice-icon {
+            font-size: 2.2rem;
+            color: var(--accent-gold);
+        }
+
+        .notice-content h4 {
+            font-size: 1.15rem;
+            font-weight: 800;
+            color: var(--accent-gold);
+            margin-bottom: 4px;
+        }
+
+        .notice-content p {
+            font-size: 0.95rem;
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        /* =========================================================
+           5. شبكة عرض الجداول الدراسية (Timetable Section)
            ========================================================= */
         .timetable-section {
             width: 100%;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
             gap: 25px;
             margin-bottom: 40px;
         }
 
         .timetable-card {
             background: var(--card-bg);
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(12px);
             border: 1px solid var(--card-border);
             border-radius: var(--radius-xl);
             overflow: hidden;
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.35);
         }
 
         .timetable-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-6px);
             border-color: var(--accent-cyan);
-            box-shadow: 0 20px 40px rgba(6, 182, 212, 0.2);
+            box-shadow: 0 20px 45px rgba(6, 182, 212, 0.25);
         }
 
         .card-header {
-            background: linear-gradient(90deg, rgba(59, 130, 246, 0.2), rgba(6, 182, 212, 0.2));
-            padding: 18px 20px;
+            background: linear-gradient(90deg, rgba(59, 130, 246, 0.22), rgba(6, 182, 212, 0.22));
+            padding: 18px 22px;
             border-bottom: 1px solid var(--card-border);
             display: flex;
             justify-content: space-between;
@@ -235,15 +269,18 @@
         }
 
         .card-header h3 {
-            font-size: 1.3rem;
-            font-weight: 800;
+            font-size: 1.35rem;
+            font-weight: 900;
             color: var(--accent-cyan);
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
         .card-header .badge {
             background: rgba(245, 158, 11, 0.2);
             color: var(--accent-gold);
-            padding: 4px 12px;
+            padding: 5px 14px;
             border-radius: 20px;
             font-size: 0.85rem;
             font-weight: 700;
@@ -259,9 +296,9 @@
         }
 
         .schedule-table th, .schedule-table td {
-            padding: 10px 12px;
+            padding: 12px 10px;
             text-align: right;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
             font-size: 0.95rem;
         }
 
@@ -269,49 +306,19 @@
             color: var(--text-muted);
             font-weight: 700;
             font-size: 0.85rem;
+            background: rgba(15, 23, 42, 0.4);
         }
 
         .schedule-table td strong {
             color: var(--text-light);
-        }
-
-        .period-time {
-            color: var(--accent-gold);
-            font-size: 0.8rem;
-            font-weight: 600;
-        }
-
-        /* =========================================================
-           5. الإعلانات والتنبيهات الهامة (Announcements Bar)
-           ========================================================= */
-        .notice-board {
-            width: 100%;
-            background: rgba(245, 158, 11, 0.08);
-            border: 1px solid rgba(245, 158, 11, 0.2);
-            border-radius: var(--radius-xl);
-            padding: 20px 25px;
-            margin-bottom: 40px;
-            display: flex;
-            align-items: center;
-            gap: 20px;
-        }
-
-        .notice-icon {
-            font-size: 2rem;
-            color: var(--accent-gold);
-        }
-
-        .notice-content h4 {
-            font-size: 1.1rem;
             font-weight: 800;
-            color: var(--accent-gold);
-            margin-bottom: 4px;
         }
 
-        .notice-content p {
-            font-size: 0.95rem;
-            color: var(--text-light);
-            line-height: 1.6;
+        .sub-text {
+            display: block;
+            font-size: 0.8rem;
+            color: var(--accent-gold);
+            margin-top: 3px;
         }
 
         /* =========================================================
@@ -320,23 +327,23 @@
         footer {
             width: 100%;
             margin-top: auto;
-            padding: 25px 0;
+            padding: 30px 0;
             border-top: 1px solid var(--card-border);
             text-align: center;
             color: var(--text-muted);
-            font-size: 0.9rem;
-            line-height: 1.7;
+            font-size: 0.95rem;
+            line-height: 1.8;
         }
 
         footer .developer {
             color: var(--accent-cyan);
-            font-weight: 800;
+            font-weight: 900;
             font-family: monospace;
-            font-size: 1.1rem;
+            font-size: 1.15rem;
         }
 
-        /* Responsive Settings */
-        @media (max-width: 600px) {
+        /* Responsive */
+        @media (max-width: 768px) {
             header {
                 flex-direction: column;
                 text-align: center;
@@ -355,7 +362,7 @@
 
     <div class="container">
 
-        <!-- هيدر المدرسة ومعلومات الإدارة -->
+        <!-- الهيدر الرئيسي بمعلومات المدرسة ومديرتها أ/ ولاء حسين -->
         <header>
             <div class="school-brand">
                 <div class="school-logo">
@@ -363,7 +370,7 @@
                 </div>
                 <div class="school-info">
                     <h1>مدرسة الأورمان الرسمية للغات</h1>
-                    <p><i class="fas fa-bookmark"></i> البوابة الإلكترونية لجدول الصف الثاني الثانوي</p>
+                    <p><i class="fas fa-calendar-alt"></i> جداول الحصص الأسبوعية - الصف الثاني الثانوي</p>
                 </div>
             </div>
 
@@ -376,11 +383,11 @@
             </div>
         </header>
 
-        <!-- لوحة تصفية الفصول -->
+        <!-- لوحة التحكم وتصفية الفصول -->
         <div class="controls-panel">
             <div class="panel-title">
                 <i class="fas fa-filter"></i>
-                <span>اختر الفصل لعرض الجدول الدراسي المعتمد:</span>
+                <span>اختر الفصل الدراسي لعرض جدوله المعتمد:</span>
             </div>
 
             <div class="class-selector-group">
@@ -398,54 +405,125 @@
             </div>
         </div>
 
-        <!-- لوحة تنبيهات إدارة المدرسة -->
+        <!-- لوحة التنبيهات -->
         <div class="notice-board">
             <div class="notice-icon">
                 <i class="fas fa-bullhorn"></i>
             </div>
             <div class="notice-content">
-                <h4>تنبيه هام للطلاب وطاقم التدريس:</h4>
-                <p>يرجى الالتزام بمواعيد الحصص اليومية وطابور الصباح في تمام الساعة 7:30 صباحاً. تم اعتماد هذا الجدول برعاية وإشراف أ/ ولاء حسين مدير المدرسة.</p>
+                <h4>تنبيه هام للطلاب:</h4>
+                <p>تم اعتماد الجداول الدراسية لجميع فصول الصف الثاني الثانوي رسمياً تحت إشراف وتوجيهات مدير المدرسة <strong>أ/ ولاء حسين</strong>. يرجى المتابعة اليومية للحصص والأنشطة.</p>
             </div>
         </div>
 
-        <!-- معرض شبكة الجداول الدراسية -->
+        <!-- شبكة عرض الجداول لكل فصل -->
         <div class="timetable-section" id="timetable-grid">
-            <!-- الفصول تتولد عبر السكربت أو تظهر ديناميكياً -->
+            <!-- سيتم توليد الجداول هنا تلقائياً عبر الجافاسكريبت -->
         </div>
 
-        <!-- تذييل الصفحة -->
+        <!-- الفوتر -->
         <footer>
             <p>جميع الحقوق محفوظة © مدرسة الأورمان الرسمية للغات</p>
-            <p>تم التطوير والتصميم بواسطة الطالب: <span class="developer">jou</span></p>
+            <p>تصميم وتطوير البوابة الإلكترونية بواسطة الطالب: <span class="developer">jou</span></p>
         </footer>
 
     </div>
 
-    <!-- السكربتات البرمجية لتوليد الجداول وتصفيتها -->
+    <!-- كود الجافاسكريبت المخصص للبيانات والجداول -->
     <script>
-        // مصفوفة فصول الصف الثاني الثانوي وموادها
+        /* بيانات الفصول بناءً على الصور المرفقة */
         const classesData = [
-            { id: "2-1", name: "فصل 2 / 1 ثانوي", track: "علمي / أدبي" },
-            { id: "2-2", name: "فصل 2 / 2 ثانوي", track: "علمي / أدبي" },
-            { id: "2-3", name: "فصل 2 / 3 ثانوي", track: "علمي / أدبي" },
-            { id: "2-4", name: "فصل 2 / 4 ثانوي", track: "علمي / أدبي" },
-            { id: "2-5", name: "فصل 2 / 5 ثانوي", track: "أعمال ولغات" },
-            { id: "2-6", name: "فصل 2 / 6 ثانوي", track: "علمي / أدبي" },
-            { id: "2-7", name: "فصل 2 / 7 ثانوي", track: "علمي / أدبي" },
-            { id: "2-8", name: "فصل 2 / 8 ثانوي", track: "علمي / أدبي" }
+            {
+                id: "2-1",
+                name: "فصل 2 / 1",
+                schedule: [
+                    { day: "الأحد", p1: "Arabic <span class='sub-text'>Taha Abdalla</span>", p2: "P.E / Financial", p3: "Financial / Eng.", p4: "Eng. / History" },
+                    { day: "الإثنين", p1: "History / Arabic", p2: "Magdy Moharam", p3: "Magdy Moharam", p4: "Ahmed Ebada" },
+                    { day: "الثلاثاء", p1: "History <span class='sub-text'>Magdy Moharam</span>", p2: "Magdy Moharam", p3: "Arabic <span class='sub-text'>Taha Abdalla</span>", p4: "Arabic / Eng." },
+                    { day: "الأربعاء", p1: "History <span class='sub-text'>Magdy Moharam</span>", p2: "Choossen 1", p3: "Choossen 1", p4: "Leadership <span class='sub-text'>Taha Abdalla</span>" },
+                    { day: "الخميس", p1: "Choossen 1", p2: "Choossen 1", p3: "Choossen 1", p4: "Eng. <span class='sub-text'>Ahmed Ebada</span>" }
+                ]
+            },
+            {
+                id: "2-2",
+                name: "فصل 2 / 2",
+                schedule: [
+                    { day: "الأحد", p1: "Arabic <span class='sub-text'>Atef Zaglol</span>", p2: "Financial Literacy", p3: "Eng. <span class='sub-text'>Marwa Ebrahim</span>", p4: "History <span class='sub-text'>Enas Amin</span>" },
+                    { day: "الإثنين", p1: "Eng. <span class='sub-text'>Marwa Ebrahim</span>", p2: "History <span class='sub-text'>Enas Amin</span>", p3: "Arabic <span class='sub-text'>Atef Zaglol</span>", p4: "P.E <span class='sub-text'>Hassan / Mona</span>" },
+                    { day: "الثلاثاء", p1: "Choossen 1", p2: "Choossen 1", p3: "History <span class='sub-text'>Enas Amin</span>", p4: "Arabic <span class='sub-text'>Atef Zaglol</span>" },
+                    { day: "الأربعاء", p1: "Arabic <span class='sub-text'>Atef Zaglol</span>", p2: "Arabic <span class='sub-text'>Atef Zaglol</span>", p3: "History <span class='sub-text'>Enas Amin</span>", p4: "Leadership <span class='sub-text'>Marwa Ebrahim</span>" },
+                    { day: "الخميس", p1: "Choossen 1", p2: "Choossen 1", p3: "Choossen 1", p4: "Eng. <span class='sub-text'>Marwa Ebrahim</span>" }
+                ]
+            },
+            {
+                id: "2-3",
+                name: "fصل 2 / 3",
+                schedule: [
+                    { day: "الأحد", p1: "P.E <span class='sub-text'>Hassan / Mona</span>", p2: "History <span class='sub-text'>Enas Amin</span>", p3: "Arabic <span class='sub-text'>Atef Zaglol</span>", p4: "Choossen 2" },
+                    { day: "الإثنين", p1: "History <span class='sub-text'>Enas Amin</span>", p2: "Choossen 2", p3: "Financial Literacy", p4: "Arabic <span class='sub-text'>Atef Zaglol</span>" },
+                    { day: "الثلاثاء", p1: "History <span class='sub-text'>Enas Amin</span>", p2: "Choossen 2", p3: "Choossen 2", p4: "Eng. <span class='sub-text'>Ahmed Ebada</span>" },
+                    { day: "الأربعاء", p1: "History <span class='sub-text'>Enas Amin</span>", p2: "Choossen 2", p3: "Eng. <span class='sub-text'>Ahmed Ebada</span>", p4: "Leadership <span class='sub-text'>Atef Zaglol</span>" },
+                    { day: "الخميس", p1: "History <span class='sub-text'>Enas Amin</span>", p2: "History <span class='sub-text'>Enas Amin</span>", p3: "Arabic <span class='sub-text'>Atef Zaglol</span>", p4: "Arabic <span class='sub-text'>Atef Zaglol</span>" }
+                ]
+            },
+            {
+                id: "2-4",
+                name: "فصل 2 / 4",
+                schedule: [
+                    { day: "الأحد", p1: "History <span class='sub-text'>Enas Amin</span>", p2: "Arabic <span class='sub-text'>Abd-Elrahman</span>", p3: "Eng. <span class='sub-text'>Ahmed Ebada</span>", p4: "Financial Literacy" },
+                    { day: "الإثنين", p1: "Eng. <span class='sub-text'>Ahmed Ebada</span>", p2: "Choossen 3", p3: "Choossen 3", p4: "History <span class='sub-text'>Enas Amin</span>" },
+                    { day: "الثلاثاء", p1: "Eng. <span class='sub-text'>Ahmed Ebada</span>", p2: "P.E", p3: "Arabic <span class='sub-text'>Abd-Elrahman</span>", p4: "History <span class='sub-text'>Enas Amin</span>" },
+                    { day: "الأربعاء", p1: "Eng. <span class='sub-text'>Ahmed Ebada</span>", p2: "Choossen 1", p3: "Choossen 1", p4: "Leadership" },
+                    { day: "الخميس", p1: "Choossen 1", p2: "Choossen 1", p3: "Choossen 1", p4: "History <span class='sub-text'>Enas Amin</span>" }
+                ]
+            },
+            {
+                id: "2-5",
+                name: "فصل 2 / 5",
+                schedule: [
+                    { day: "الأحد", p1: "Arabic <span class='sub-text'>Abd-Elrahman</span>", p2: "Choossen 3", p3: "Choossen 3", p4: "History <span class='sub-text'>Safaa Ahmed</span>" },
+                    { day: "الإثنين", p1: "Eng. <span class='sub-text'>Ahmed Ebada</span>", p2: "Choossen 3", p3: "Choossen 3", p4: "History <span class='sub-text'>Safaa Ahmed</span>" },
+                    { day: "الثلاثاء", p1: "Eng. <span class='sub-text'>Marwa Ebrahim</span>", p2: "Arabic <span class='sub-text'>Abd-Elrahman</span>", p3: "Financial Literacy", p4: "History <span class='sub-text'>Safaa Ahmed</span>" },
+                    { day: "الأربعاء", p1: "Arabic <span class='sub-text'>Abd-Elrahman</span>", p2: "P.E", p3: "Eng. <span class='sub-text'>Marwa Ebrahim</span>", p4: "Leadership" },
+                    { day: "الخميس", p1: "Arabic <span class='sub-text'>Abd-Elrahman</span>", p2: "Arabic <span class='sub-text'>Abd-Elrahman</span>", p3: "Choossen 3", p4: "History <span class='sub-text'>Safaa Ahmed</span>" }
+                ]
+            },
+            {
+                id: "2-6",
+                name: "فصل 2 / 6",
+                schedule: [
+                    { day: "الأحد", p1: "Financial Literacy", p2: "History <span class='sub-text'>Esra Ashraf</span>", p3: "Choossen 4", p4: "Arabic <span class='sub-text'>Atef Zaglol</span>" },
+                    { day: "الإثنين", p1: "Arabic <span class='sub-text'>Atef Zaglol</span>", p2: "Eng. <span class='sub-text'>Hesham A.Ghany</span>", p3: "Choossen 4", p4: "P.E <span class='sub-text'>Hassan / Mona</span>" },
+                    { day: "الثلاثاء", p1: "Arabic <span class='sub-text'>Atef Zaglol</span>", p2: "Choossen 4", p3: "History <span class='sub-text'>Esra Ashraf</span>", p4: "History <span class='sub-text'>Shaymaa said</span>" },
+                    { day: "الأربعاء", p1: "History <span class='sub-text'>Esra Ashraf</span>", p2: "History <span class='sub-text'>Esra Ashraf</span>", p3: "Eng. <span class='sub-text'>Hesham A.Ghany</span>", p4: "Leadership" },
+                    { day: "الخميس", p1: "Arabic <span class='sub-text'>Atef Zaglol</span>", p2: "Eng. <span class='sub-text'>Hesham A.Ghany</span>", p3: "History <span class='sub-text'>Shaymaa said</span>", p4: "History <span class='sub-text'>Esra Ashraf</span>" }
+                ]
+            },
+            {
+                id: "2-7",
+                name: "فصل 2 / 7",
+                schedule: [
+                    { day: "الأحد", p1: "Choossen 4", p2: "Choossen 4", p3: "Arabic <span class='sub-text'>Essam Lotfy</span>", p4: "Eng. <span class='sub-text'>Marwa Ebrahim</span>" },
+                    { day: "الإثنين", p1: "Choossen 4", p2: "Choossen 4", p3: "Arabic <span class='sub-text'>Essam Lotfy</span>", p4: "Eng. <span class='sub-text'>Marwa Ebrahim</span>" },
+                    { day: "الثلاثاء", p1: "Arabic <span class='sub-text'>Essam Lotfy</span>", p2: "Choossen 4", p3: "Choossen 4", p4: "History <span class='sub-text'>Magdy Moharam</span>" },
+                    { day: "الأربعاء", p1: "Eng. <span class='sub-text'>Marwa Ebrahim</span>", p2: "History <span class='sub-text'>Magdy Moharam</span>", p3: "P.E <span class='sub-text'>Hassan / Mona</span>", p4: "Leadership" },
+                    { day: "الخميس", p1: "Arabic <span class='sub-text'>Essam Lotfy</span>", p2: "Eng. <span class='sub-text'>Marwa Ebrahim</span>", p3: "History <span class='sub-text'>Magdy Moharam</span>", p4: "History <span class='sub-text'>Magdy Moharam</span>" }
+                ]
+            },
+            {
+                id: "2-8",
+                name: "فصل 2 / 8",
+                schedule: [
+                    { day: "الأحد", p1: "Eng. <span class='sub-text'>Hesham A.Ghany</span>", p2: "History <span class='sub-text'>Abdalla Hamed</span>", p3: "History <span class='sub-text'>Abdalla Hamed</span>", p4: "Choossen 4 <span class='sub-text'>Baha' / Amr</span>" },
+                    { day: "الإثنين", p1: "Eng. <span class='sub-text'>Hesham A.Ghany</span>", p2: "History <span class='sub-text'>Abdalla Hamed</span>", p3: "Arabic <span class='sub-text'>Essam Lotfy</span>", p4: "Choossen 4" },
+                    { day: "الثلاثاء", p1: "Arabic <span class='sub-text'>Mohamed Tarek</span>", p2: "History <span class='sub-text'>Abdalla Hamed</span>", p3: "History <span class='sub-text'>Abdalla Hamed</span>", p4: "Choossen 4" },
+                    { day: "الأربعاء", p1: "Financial Literacy", p2: "Eng. <span class='sub-text'>Hesham A.Ghany</span>", p3: "Arabic <span class='sub-text'>Mohamed Tarek</span>", p4: "Leadership" },
+                    { day: "الخميس", p1: "Eng. <span class='sub-text'>Hesham A.Ghany</span>", p2: "P.E", p3: "Arabic <span class='sub-text'>Mohamed Tarek</span>", p4: "Arabic <span class='sub-text'>Mohamed Tarek</span>" }
+                ]
+            }
         ];
 
-        // جدول الحصص الافتراضي
-        const weeklySchedule = [
-            { day: "الأحد", p1: "اللغة العربية", p2: "الرياضيات", p3: "اللغة الأجنبية الأولى", p4: "الكيمياء / التاريخ" },
-            { day: "الإثنين", p1: "الفيزياء / الجغرافيا", p2: "اللغة الأجنبية الثانية", p3: "اللغة العربية", p4: "حاسب آلي وذكاء اصطناعي" },
-            { day: "الثلاثاء", p1: "الأحياء / الفلسفة", p2: "الرياضيات التطبيقية", p3: "اللغة الأجنبية الأولى", p4: "تربية دينية" },
-            { day: "الأربعاء", p1: "اللغة العربية", p2: "الكيمياء / التاريخ", p3: "الفيزياء / الجغرافيا", p4: "تربية رياضية" },
-            { day: "الخميس", p1: "اللغة الأجنبية الأولى", p2: "الأحياء / الفلسفة", p3: "الرياضيات", p4: "نشاط إثرائي" }
-        ];
-
-        // دالة رندر وتوليد كروت الجداول
+        /* دالة عرض وتوليد الجداول بناءً على الفلتر */
         function renderTimetables(filterId = 'all') {
             const grid = document.getElementById('timetable-grid');
             grid.innerHTML = '';
@@ -459,8 +537,8 @@
                 card.className = 'timetable-card';
                 card.innerHTML = `
                     <div class="card-header">
-                        <h3><i class="fas fa-users-class"></i> ${item.name}</h3>
-                        <span class="badge">${item.track}</span>
+                        <h3><i class="fas fa-users"></i> ${item.name}</h3>
+                        <span class="badge">الثاني الثانوي</span>
                     </div>
                     <div class="card-body">
                         <table class="schedule-table">
@@ -474,7 +552,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                ${weeklySchedule.map(s => `
+                                ${item.schedule.map(s => `
                                     <tr>
                                         <td><strong>${s.day}</strong></td>
                                         <td>${s.p1}</td>
@@ -491,17 +569,16 @@
             });
         }
 
-        // دالة تصفية الفصول عند النقر على الأزرار
+        /* دالة تصفية فصول الصف الثاني الثانوي */
         function filterClass(classId) {
             document.querySelectorAll('.class-btn').forEach(btn => {
                 btn.classList.remove('active');
             });
-
             event.currentTarget.classList.add('active');
             renderTimetables(classId);
         }
 
-        // تشغيل الرندر الأولي عند تحميل الصفحة
+        /* تشغيل عرض كافة الجداول افتراضياً عند تحميل الصفحة */
         window.onload = () => {
             renderTimetables('all');
         };
