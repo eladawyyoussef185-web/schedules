@@ -4,6 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>بوابة الجداول الدراسية - الصف الثاني الثانوي | مدرسة الأورمان الرسمية للغات</title>
+    <!-- الـ Keywords والـ Meta Tags الرسمية -->
+    <meta name="description" content="البوابة الإلكترونية المعتمدة لجداول حصص الصف الثاني الثانوي بمدرسة الأورمان الرسمية للغات تحت إشراف أ/ ولاء حسين مدير المدرسة.">
+    <meta name="keywords" content="مدرسة الأورمان الرسمية للغات, جدول الحصص, ثانية ثانوي, الأورمان, الدقي, أ/ ولاء حسين, جدول المدرسة">
+    <meta name="author" content="jou">
+
     <!-- الخطوط والأيقونات -->
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -99,6 +104,13 @@
             margin-top: 4px;
         }
 
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
         .principal-badge {
             background: rgba(245, 158, 11, 0.12);
             border: 1px solid rgba(245, 158, 11, 0.4);
@@ -112,6 +124,27 @@
         .principal-badge i { font-size: 1.6rem; color: var(--accent-gold); }
         .principal-text span { font-size: 0.8rem; color: var(--text-muted); display: block; }
         .principal-text strong { font-size: 1.15rem; color: var(--text-light); font-weight: 900; }
+
+        /* زرار الشير الفخم */
+        .share-btn {
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan));
+            color: #fff;
+            border: none;
+            padding: 12px 22px;
+            border-radius: var(--radius-lg);
+            font-weight: 800;
+            font-size: 1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: var(--shadow-glow);
+            transition: all 0.3s ease;
+        }
+        .share-btn:hover {
+            transform: translateY(-2px);
+            opacity: 0.9;
+        }
 
         /* تصفية الفصول */
         .controls-panel {
@@ -275,11 +308,16 @@
                 </div>
             </div>
 
-            <div class="principal-badge">
-                <i class="fas fa-user-tie"></i>
-                <div class="principal-text">
-                    <span>مدير المدرسة</span>
-                    <strong>أ / ولاء حسين</strong>
+            <div class="header-actions">
+                <button class="share-btn" onclick="shareWebsite()">
+                    <i class="fas fa-share-alt"></i> مشاركة الجدول
+                </button>
+                <div class="principal-badge">
+                    <i class="fas fa-user-tie"></i>
+                    <div class="principal-text">
+                        <span>مدير المدرسة</span>
+                        <strong>أ / ولاء حسين</strong>
+                    </div>
                 </div>
             </div>
         </header>
@@ -323,7 +361,7 @@
             `;
         }
 
-        /* البيانات الرسمية المطابقة للصور بدقة لكل فصل من 2/1 إلى 2/8 مع المسارات والمدرسين بالتفصيل */
+        /* البيانات الأصلية الدقيقة بالكامل من الصور[cite: 1, 2, 3, 4, 5] */
         const classesData = [
             {
                 id: "2-1",
@@ -471,6 +509,20 @@
             });
             event.currentTarget.classList.add('active');
             renderTimetables(classId);
+        }
+
+        /* دالة مشاركة الموقع عبر واجهة المتصفح */
+        function shareWebsite() {
+            if (navigator.share) {
+                navigator.share({
+                    title: 'جدول الصف الثاني الثانوي - الأورمان',
+                    text: 'جداول الحصص المعتمدة للصف الثاني الثانوي - مدرسة الأورمان الرسمية للغات',
+                    url: window.location.href,
+                }).catch(() => {});
+            } else {
+                navigator.clipboard.writeText(window.location.href);
+                alert('تم نسخ رابط الموقع بنجاح! 📋✨');
+            }
         }
 
         window.onload = () => {
