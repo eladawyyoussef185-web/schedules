@@ -3,616 +3,507 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>جداول الحصص المدرسية | School Schedules</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Poppins:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <title>بوابة الجداول الدراسية - الصف الثاني الثانوي | مدرسة الأورمان الرسمية للغات</title>
+    <!-- الخطوط والأيقونات -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    
     <style>
+        /* =========================================================
+           1. المتغيرات والتنسيقات الأساسية (CSS Variables & Resets)
+           ========================================================= */
         :root {
-            --primary: #0f172a;
-            --accent: #2563eb;
-            --accent-hover: #1d4ed8;
-            --bg-overlay: rgba(248, 250, 252, 0.88); /* طبقة لتوضيح الكلام فوق الصورة */
-            --card-bg: rgba(255, 255, 255, 0.92);
-            --text: #1e293b;
-            /* رابط صورة الخلفية - تقدر تستبدل bg.jpg باسم الصورة بتاعتك */
-            --bg-image: url('bg.jpg'); 
+            --bg-primary: #0b132b;
+            --bg-secondary: #1c2541;
+            --accent-gold: #f59e0b;
+            --accent-blue: #3b82f6;
+            --accent-cyan: #06b6d4;
+            --text-light: #f8fafc;
+            --text-muted: #94a3b8;
+            --card-bg: rgba(30, 41, 59, 0.7);
+            --card-border: rgba(255, 255, 255, 0.1);
+            --radius-xl: 20px;
+            --radius-lg: 12px;
+            --shadow-glow: 0 10px 30px rgba(59, 130, 246, 0.2);
+            --font-family: 'Cairo', sans-serif;
         }
 
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Cairo', 'Poppins', sans-serif; }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: var(--font-family);
+            -webkit-tap-highlight-color: transparent;
+        }
 
         body {
-            background-image: linear-gradient(var(--bg-overlay), var(--bg-overlay)), var(--bg-image);
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            background-repeat: no-repeat;
-            color: var(--text);
+            background: radial-gradient(circle at top right, #1c2541 0%, #0b132b 60%, #050814 100%);
+            color: var(--text-light);
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 15px;
-            position: relative;
-        }
-
-        /* زر تغيير اللغة */
-        .lang-switch-container {
-            width: 100%;
-            max-width: 480px;
-            display: flex;
-            justify-content: flex-end;
-            margin-bottom: 5px;
-        }
-
-        .lang-btn {
-            background: var(--card-bg);
-            color: var(--primary);
-            border: 2px solid #e2e8f0;
-            padding: 6px 14px;
-            border-radius: 20px;
-            font-weight: 700;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            font-size: 0.85rem;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-            transition: all 0.3s ease;
-        }
-
-        .lang-btn:hover {
-            border-color: var(--accent);
-            color: var(--accent);
-        }
-
-        header {
-            text-align: center;
-            margin: 10px 0 20px;
-        }
-
-        header .logo-icon {
-            font-size: 2.5rem;
-            color: var(--accent);
-            margin-bottom: 8px;
-        }
-
-        header h1 {
-            color: var(--primary);
-            font-size: 1.6rem;
-            font-weight: 900;
-        }
-
-        header p {
-            color: #475569;
-            font-size: 0.9rem;
-            margin-top: 4px;
-            font-weight: 600;
+            padding: 20px 15px;
+            overflow-x: hidden;
         }
 
         .container {
             width: 100%;
-            max-width: 480px;
-            background: var(--card-bg);
-            backdrop-filter: blur(8px);
-            padding: 22px;
-            border-radius: 20px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-            border: 1px solid rgba(255, 255, 255, 0.6);
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
-        .form-group {
+        /* =========================================================
+           2. الهيدر والشعار (Header Section)
+           ========================================================= */
+        header {
+            width: 100%;
+            background: rgba(28, 37, 65, 0.8);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--card-border);
+            border-radius: var(--radius-xl);
+            padding: 25px 30px;
+            margin-bottom: 25px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
             display: flex;
-            flex-direction: column;
-            gap: 8px;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
         }
 
-        label {
-            font-weight: 700;
+        .school-brand {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+        }
+
+        .school-logo {
+            width: 65px;
+            height: 65px;
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: #fff;
+            box-shadow: var(--shadow-glow);
+        }
+
+        .school-info h1 {
+            font-size: 1.6rem;
+            font-weight: 900;
+            color: var(--text-light);
+            line-height: 1.2;
+        }
+
+        .school-info p {
             font-size: 0.95rem;
-            color: var(--primary);
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        select {
-            width: 100%;
-            padding: 12px 15px;
-            border: 2px solid #cbd5e1;
-            border-radius: 12px;
-            font-size: 1rem;
-            outline: none;
-            background-color: #fff;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            color: var(--text);
-            font-weight: 600;
-        }
-
-        select:focus {
-            border-color: var(--accent);
-            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
-        }
-
-        /* أزرار المشاركة والباركود */
-        .main-action-btns, .action-btns {
-            display: flex;
-            gap: 10px;
-            width: 100%;
-        }
-
-        .btn {
-            flex: 1;
-            padding: 11px 14px;
-            border-radius: 12px;
-            border: none;
+            color: var(--accent-gold);
             font-weight: 700;
-            font-size: 0.88rem;
-            cursor: pointer;
+            margin-top: 4px;
+        }
+
+        .principal-badge {
+            background: rgba(245, 158, 11, 0.1);
+            border: 1px solid rgba(245, 158, 11, 0.3);
+            padding: 10px 20px;
+            border-radius: var(--radius-lg);
             display: flex;
             align-items: center;
-            justify-content: center;
-            gap: 8px;
-            transition: all 0.2s ease;
+            gap: 12px;
         }
 
-        .btn-main-share { background-color: #4f46e5; color: #fff; }
-        .btn-main-share:hover { background-color: #4338ca; }
+        .principal-badge i {
+            font-size: 1.4rem;
+            color: var(--accent-gold);
+        }
 
-        .btn-main-qr { background-color: #0d9488; color: #fff; }
-        .btn-main-qr:hover { background-color: #0f766e; }
-
-        .btn-share { background-color: var(--accent); color: #fff; }
-        .btn-share:hover { background-color: var(--accent-hover); }
-
-        .btn-qr { background-color: #059669; color: #fff; }
-        .btn-qr:hover { background-color: #047857; }
-
-        .schedule-display {
-            margin-top: 10px;
-            display: none;
+        .principal-text {
+            display: flex;
             flex-direction: column;
-            align-items: center;
-            gap: 15px;
-            animation: fadeIn 0.4s ease;
         }
 
-        .placeholder-box {
+        .principal-text span {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .principal-text strong {
+            font-size: 1.05rem;
+            color: var(--text-light);
+            font-weight: 800;
+        }
+
+        /* =========================================================
+           3. شريط التنقل وتصفية الفصول (Filter Controls)
+           ========================================================= */
+        .controls-panel {
             width: 100%;
-            padding: 35px 20px;
-            border-radius: 14px;
-            border: 2px dashed #94a3b8;
-            background: rgba(241, 245, 249, 0.8);
-            text-align: center;
-            color: #475569;
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--card-border);
+            border-radius: var(--radius-xl);
+            padding: 20px;
+            margin-bottom: 30px;
             display: flex;
             flex-direction: column;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .panel-title {
+            font-size: 1.2rem;
+            font-weight: 800;
+            color: var(--accent-cyan);
+            display: flex;
             align-items: center;
             gap: 10px;
         }
 
-        .placeholder-box i {
-            font-size: 2.5rem;
-            color: var(--accent);
-        }
-
-        .placeholder-box h3 {
-            font-size: 1.15rem;
-            font-weight: 800;
-            color: var(--primary);
-        }
-
-        .placeholder-box p {
-            font-size: 0.9rem;
-            color: #64748b;
-            font-weight: 600;
-        }
-
-        .schedule-img {
-            width: 100%;
-            height: auto;
-            border-radius: 14px;
-            display: none;
-            object-fit: contain;
-            box-shadow: 0 6px 18px rgba(0,0,0,0.08);
-            border: 1px solid #e2e8f0;
-        }
-
-        /* نافذة QR Modal */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(15, 23, 42, 0.65);
-            backdrop-filter: blur(5px);
-            z-index: 1000;
+        .class-selector-group {
+            display: flex;
+            flex-wrap: wrap;
             justify-content: center;
+            gap: 10px;
+            width: 100%;
+        }
+
+        .class-btn {
+            background: rgba(15, 23, 42, 0.6);
+            color: var(--text-light);
+            border: 1px solid var(--card-border);
+            padding: 10px 22px;
+            border-radius: var(--radius-lg);
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
             align-items: center;
+            gap: 8px;
+        }
+
+        .class-btn:hover {
+            border-color: var(--accent-blue);
+            transform: translateY(-2px);
+            background: rgba(59, 130, 246, 0.2);
+        }
+
+        .class-btn.active {
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan));
+            border-color: transparent;
+            box-shadow: var(--shadow-glow);
+            color: #fff;
+        }
+
+        /* =========================================================
+           4. عرض الجداول والمواد (Timetable Grid Display)
+           ========================================================= */
+        .timetable-section {
+            width: 100%;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .timetable-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--card-border);
+            border-radius: var(--radius-xl);
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+        }
+
+        .timetable-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-cyan);
+            box-shadow: 0 20px 40px rgba(6, 182, 212, 0.2);
+        }
+
+        .card-header {
+            background: linear-gradient(90deg, rgba(59, 130, 246, 0.2), rgba(6, 182, 212, 0.2));
+            padding: 18px 20px;
+            border-bottom: 1px solid var(--card-border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .card-header h3 {
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: var(--accent-cyan);
+        }
+
+        .card-header .badge {
+            background: rgba(245, 158, 11, 0.2);
+            color: var(--accent-gold);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 700;
+        }
+
+        .card-body {
             padding: 20px;
         }
 
-        .modal-content {
-            background: #fff;
-            padding: 25px;
-            border-radius: 20px;
-            text-align: center;
-            max-width: 320px;
+        .schedule-table {
             width: 100%;
-            box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 15px;
+            border-collapse: collapse;
         }
 
-        .modal-content h3 {
-            font-size: 1.1rem;
-            color: var(--primary);
+        .schedule-table th, .schedule-table td {
+            padding: 10px 12px;
+            text-align: right;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            font-size: 0.95rem;
         }
 
-        #qrcode img {
-            margin: 0 auto;
-            border: 8px solid #f8fafc;
-            border-radius: 12px;
-        }
-
-        .close-btn {
-            background: #ef4444;
-            color: #fff;
-            border: none;
-            padding: 8px 18px;
-            border-radius: 10px;
+        .schedule-table th {
+            color: var(--text-muted);
             font-weight: 700;
-            cursor: pointer;
+            font-size: 0.85rem;
         }
 
-        footer {
-            margin-top: auto;
-            padding: 25px 10px 10px;
-            text-align: center;
-            font-size: 0.88rem;
-            color: #334155;
-            line-height: 1.6;
+        .schedule-table td strong {
+            color: var(--text-light);
+        }
+
+        .period-time {
+            color: var(--accent-gold);
+            font-size: 0.8rem;
             font-weight: 600;
         }
 
-        footer .dev { color: var(--primary); font-weight: 800; }
-        footer .class-info { color: var(--accent); font-weight: 700; }
-        footer .sig {
-            font-family: monospace;
-            font-weight: 900;
-            color: var(--accent);
-            font-size: 1rem;
-            letter-spacing: 1px;
-            margin-top: 4px;
-            display: block;
-            text-transform: uppercase;
+        /* =========================================================
+           5. الإعلانات والتنبيهات الهامة (Announcements Bar)
+           ========================================================= */
+        .notice-board {
+            width: 100%;
+            background: rgba(245, 158, 11, 0.08);
+            border: 1px solid rgba(245, 158, 11, 0.2);
+            border-radius: var(--radius-xl);
+            padding: 20px 25px;
+            margin-bottom: 40px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(8px); }
-            to { opacity: 1; transform: translateY(0); }
+        .notice-icon {
+            font-size: 2rem;
+            color: var(--accent-gold);
+        }
+
+        .notice-content h4 {
+            font-size: 1.1rem;
+            font-weight: 800;
+            color: var(--accent-gold);
+            margin-bottom: 4px;
+        }
+
+        .notice-content p {
+            font-size: 0.95rem;
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        /* =========================================================
+           6. الفوتر والتوثيق (Footer)
+           ========================================================= */
+        footer {
+            width: 100%;
+            margin-top: auto;
+            padding: 25px 0;
+            border-top: 1px solid var(--card-border);
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            line-height: 1.7;
+        }
+
+        footer .developer {
+            color: var(--accent-cyan);
+            font-weight: 800;
+            font-family: monospace;
+            font-size: 1.1rem;
+        }
+
+        /* Responsive Settings */
+        @media (max-width: 600px) {
+            header {
+                flex-direction: column;
+                text-align: center;
+            }
+            .school-brand {
+                flex-direction: column;
+            }
+            .principal-badge {
+                width: 100%;
+                justify-content: center;
+            }
         }
     </style>
 </head>
 <body>
 
-    <!-- زر تبديل اللغة -->
-    <div class="lang-switch-container">
-        <button class="lang-btn" onclick="toggleLanguage()">
-            <i class="fas fa-globe"></i> <span id="lang-btn-text">English</span>
-        </button>
-    </div>
-
-    <header>
-        <div class="logo-icon"><i class="fas fa-calendar-alt"></i></div>
-        <h1 id="txt-title">جدول الحصص المدرسي</h1>
-        <p id="txt-subtitle">اختر الصف والفصل لعرض الجدول</p>
-    </header>
-
     <div class="container">
-        <!-- اختيار الصف -->
-        <div class="form-group">
-            <label id="lbl-grade" for="grade-select"><i class="fas fa-layer-group"></i> الصف الدراسي:</label>
-            <select id="grade-select" onchange="updateClassOptions()">
-                <option value="" id="opt-grade-default">-- اختر الصف --</option>
-                <option value="1" id="opt-grade-1">الصف الأول الثانوي</option>
-                <option value="2" id="opt-grade-2">الصف الثاني الثانوي</option>
-            </select>
-        </div>
 
-        <!-- اختيار الفصل -->
-        <div class="form-group">
-            <label id="lbl-class" for="class-select"><i class="fas fa-users"></i> الفصل:</label>
-            <select id="class-select" onchange="showSchedule()" disabled>
-                <option value="" id="opt-class-default">-- اختر الصف أولاً --</option>
-            </select>
-        </div>
-
-        <!-- أزرار مشاركة وبار كود الموقع الرئيسي -->
-        <div class="main-action-btns">
-            <button class="btn btn-main-share" onclick="shareMainWebsite()">
-                <i class="fas fa-globe"></i> <span id="btn-txt-main-share">مشاركة الموقع</span>
-            </button>
-            <button class="btn btn-main-qr" onclick="generateMainQR()">
-                <i class="fas fa-qrcode"></i> <span id="btn-txt-main-qr">باركود الموقع</span>
-            </button>
-        </div>
-
-        <!-- عرض الجدول أو الرسالة -->
-        <div id="schedule-box" class="schedule-display">
-            <!-- كارت "قريباً" -->
-            <div id="coming-soon" class="placeholder-box">
-                <i class="fas fa-clock"></i>
-                <h3 id="class-title">فصل ...</h3>
-                <p id="txt-coming-soon">قريباً... سيتم رفع الجدول فور صدوره ⏳</p>
+        <!-- هيدر المدرسة ومعلومات الإدارة -->
+        <header>
+            <div class="school-brand">
+                <div class="school-logo">
+                    <i class="fas fa-graduation-cap"></i>
+                </div>
+                <div class="school-info">
+                    <h1>مدرسة الأورمان الرسمية للغات</h1>
+                    <p><i class="fas fa-bookmark"></i> البوابة الإلكترونية لجدول الصف الثاني الثانوي</p>
+                </div>
             </div>
 
-            <!-- صورة الجدول -->
-            <img id="schedule-img" class="schedule-img" src="" alt="جدول الفصل">
+            <div class="principal-badge">
+                <i class="fas fa-user-tie"></i>
+                <div class="principal-text">
+                    <span>مدير المدرسة</span>
+                    <strong>أ / ولاء حسين</strong>
+                </div>
+            </div>
+        </header>
 
-            <!-- أزرار الجدول المحدد -->
-            <div class="action-btns">
-                <button class="btn btn-share" onclick="shareClassLink()">
-                    <i class="fas fa-share-alt"></i> <span id="btn-txt-share">مشاركة الجدول</span>
+        <!-- لوحة تصفية الفصول -->
+        <div class="controls-panel">
+            <div class="panel-title">
+                <i class="fas fa-filter"></i>
+                <span>اختر الفصل لعرض الجدول الدراسي المعتمد:</span>
+            </div>
+
+            <div class="class-selector-group">
+                <button class="class-btn active" onclick="filterClass('all')">
+                    <i class="fas fa-th-large"></i> جميع الفصول
                 </button>
-                <button class="btn btn-qr" onclick="generateQR()">
-                    <i class="fas fa-qrcode"></i> <span id="btn-txt-qr">باركود الجدول</span>
-                </button>
+                <button class="class-btn" onclick="filterClass('2-1')">فصل 2 / 1</button>
+                <button class="class-btn" onclick="filterClass('2-2')">فصل 2 / 2</button>
+                <button class="class-btn" onclick="filterClass('2-3')">فصل 2 / 3</button>
+                <button class="class-btn" onclick="filterClass('2-4')">فصل 2 / 4</button>
+                <button class="class-btn" onclick="filterClass('2-5')">فصل 2 / 5</button>
+                <button class="class-btn" onclick="filterClass('2-6')">فصل 2 / 6</button>
+                <button class="class-btn" onclick="filterClass('2-7')">فصل 2 / 7</button>
+                <button class="class-btn" onclick="filterClass('2-8')">فصل 2 / 8</button>
             </div>
         </div>
-    </div>
 
-    <!-- نافذة عرض الـ QR Code -->
-    <div id="qr-modal" class="modal">
-        <div class="modal-content">
-            <h3 id="qr-title">رمز QR</h3>
-            <div id="qrcode"></div>
-            <button class="close-btn" id="btn-close-modal" onclick="closeQRModal()">إغلاق</button>
+        <!-- لوحة تنبيهات إدارة المدرسة -->
+        <div class="notice-board">
+            <div class="notice-icon">
+                <i class="fas fa-bullhorn"></i>
+            </div>
+            <div class="notice-content">
+                <h4>تنبيه هام للطلاب وطاقم التدريس:</h4>
+                <p>يرجى الالتزام بمواعيد الحصص اليومية وطابور الصباح في تمام الساعة 7:30 صباحاً. تم اعتماد هذا الجدول برعاية وإشراف أ/ ولاء حسين مدير المدرسة.</p>
+            </div>
         </div>
+
+        <!-- معرض شبكة الجداول الدراسية -->
+        <div class="timetable-section" id="timetable-grid">
+            <!-- الفصول تتولد عبر السكربت أو تظهر ديناميكياً -->
+        </div>
+
+        <!-- تذييل الصفحة -->
+        <footer>
+            <p>جميع الحقوق محفوظة © مدرسة الأورمان الرسمية للغات</p>
+            <p>تم التطوير والتصميم بواسطة الطالب: <span class="developer">jou</span></p>
+        </footer>
+
     </div>
 
-    <footer>
-        <span id="footer-dev">تصميم وتطوير الطالب:</span> <span class="dev" id="footer-name">يوسف أحمد محمود</span> <span class="class-info">(2/5)</span> © 2026<br>
-        <span class="sig">jou</span>
-    </footer>
-
+    <!-- السكربتات البرمجية لتوليد الجداول وتصفيتها -->
     <script>
-        let currentLang = 'ar';
+        // مصفوفة فصول الصف الثاني الثانوي وموادها
+        const classesData = [
+            { id: "2-1", name: "فصل 2 / 1 ثانوي", track: "علمي / أدبي" },
+            { id: "2-2", name: "فصل 2 / 2 ثانوي", track: "علمي / أدبي" },
+            { id: "2-3", name: "فصل 2 / 3 ثانوي", track: "علمي / أدبي" },
+            { id: "2-4", name: "فصل 2 / 4 ثانوي", track: "علمي / أدبي" },
+            { id: "2-5", name: "فصل 2 / 5 ثانوي", track: "أعمال ولغات" },
+            { id: "2-6", name: "فصل 2 / 6 ثانوي", track: "علمي / أدبي" },
+            { id: "2-7", name: "فصل 2 / 7 ثانوي", track: "علمي / أدبي" },
+            { id: "2-8", name: "فصل 2 / 8 ثانوي", track: "علمي / أدبي" }
+        ];
 
-        const translations = {
-            ar: {
-                langBtn: "English",
-                title: "جدول الحصص المدرسي",
-                subtitle: "اختر الصف والفصل لعرض الجدول",
-                lblGrade: "<i class='fas fa-layer-group'></i> الصف الدراسي:",
-                optGradeDefault: "-- اختر الصف --",
-                optGrade1: "الصف الأول الثانوي",
-                optGrade2: "الصف الثاني الثانوي",
-                lblClass: "<i class='fas fa-users'></i> الفصل:",
-                optClassDefault: "-- اختر الفصل --",
-                optClassDisabled: "-- اختر الصف أولاً --",
-                btnMainShare: "مشاركة الموقع",
-                btnMainQr: "باركود الموقع",
-                btnShare: "مشاركة الجدول",
-                btnQr: "باركود الجدول",
-                comingSoon: "قريباً... سيتم رفع الجدول فور صدوره ⏳",
-                close: "إغلاق",
-                footerDev: "تصميم وتطوير الطالب:",
-                footerName: "يوسف أحمد محمود",
-                grade1Name: "أولى",
-                grade2Name: "ثانية",
-                classNames: ["أول (1)", "ثاني (2)", "ثالث (3)", "رابع (4)", "خامس (5)", "سادس (6)", "سابع (7)", "ثامن (8)"],
-                alertShareMain: "تم نسخ رابط الموقع الرئيسي بنجاح!",
-                alertShareClass: "تم نسخ رابط الفصل بنجاح!",
-                qrMainTitle: "باركود الموقع الرئيسي 🌐",
-                qrClassTitlePrefix: "باركود جدول - "
-            },
-            en: {
-                langBtn: "عربي",
-                title: "School Class Schedule",
-                subtitle: "Select grade and class to view schedule",
-                lblGrade: "<i class='fas fa-layer-group'></i> Grade Level:",
-                optGradeDefault: "-- Select Grade --",
-                optGrade1: "Grade 10 (1st Secondary)",
-                optGrade2: "Grade 11 (2nd Secondary)",
-                lblClass: "<i class='fas fa-users'></i> Class:",
-                optClassDefault: "-- Select Class --",
-                optClassDisabled: "-- Select Grade First --",
-                btnMainShare: "Share Website",
-                btnMainQr: "Website QR",
-                btnShare: "Share Schedule",
-                btnQr: "Schedule QR",
-                comingSoon: "Coming Soon... Schedule will be uploaded soon ⏳",
-                close: "Close",
-                footerDev: "Designed & Developed by Student:",
-                footerName: "Youssef Ahmed Mahmoud",
-                grade1Name: "Grade 10",
-                grade2Name: "Grade 11",
-                classNames: ["10/1", "10/2", "10/3", "10/4", "10/5", "10/6", "10/7", "10/8"],
-                classNames2: ["11/1", "11/2", "11/3", "11/4", "11/5", "11/6", "11/7", "11/8"],
-                alertShareMain: "Website link copied successfully!",
-                alertShareClass: "Class link copied successfully!",
-                qrMainTitle: "Website QR Code 🌐",
-                qrClassTitlePrefix: "Schedule QR - "
-            }
-        };
+        // جدول الحصص الافتراضي
+        const weeklySchedule = [
+            { day: "الأحد", p1: "اللغة العربية", p2: "الرياضيات", p3: "اللغة الأجنبية الأولى", p4: "الكيمياء / التاريخ" },
+            { day: "الإثنين", p1: "الفيزياء / الجغرافيا", p2: "اللغة الأجنبية الثانية", p3: "اللغة العربية", p4: "حاسب آلي وذكاء اصطناعي" },
+            { day: "الثلاثاء", p1: "الأحياء / الفلسفة", p2: "الرياضيات التطبيقية", p3: "اللغة الأجنبية الأولى", p4: "تربية دينية" },
+            { day: "الأربعاء", p1: "اللغة العربية", p2: "الكيمياء / التاريخ", p3: "الفيزياء / الجغرافيا", p4: "تربية رياضية" },
+            { day: "الخميس", p1: "اللغة الأجنبية الأولى", p2: "الأحياء / الفلسفة", p3: "الرياضيات", p4: "نشاط إثرائي" }
+        ];
 
-        const schedules = {
-            "1-1": "", "1-2": "", "1-3": "", "1-4": "",
-            "1-5": "", "1-6": "", "1-7": "", "1-8": "",
-            "2-1": "", "2-2": "", "2-3": "", "2-4": "",
-            "2-5": "", "2-6": "", "2-7": "", "2-8": ""
-        };
+        // دالة رندر وتوليد كروت الجداول
+        function renderTimetables(filterId = 'all') {
+            const grid = document.getElementById('timetable-grid');
+            grid.innerHTML = '';
 
-        function toggleLanguage() {
-            currentLang = currentLang === 'ar' ? 'en' : 'ar';
-            document.documentElement.lang = currentLang;
-            document.documentElement.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
+            const filteredClasses = filterId === 'all' 
+                ? classesData 
+                : classesData.filter(c => c.id === filterId);
 
-            const t = translations[currentLang];
-
-            document.getElementById('lang-btn-text').innerText = t.langBtn;
-            document.getElementById('txt-title').innerText = t.title;
-            document.getElementById('txt-subtitle').innerText = t.subtitle;
-            document.getElementById('lbl-grade').innerHTML = t.lblGrade;
-            document.getElementById('opt-grade-default').innerText = t.optGradeDefault;
-            document.getElementById('opt-grade-1').innerText = t.optGrade1;
-            document.getElementById('opt-grade-2').innerText = t.optGrade2;
-            document.getElementById('lbl-class').innerHTML = t.lblClass;
-            document.getElementById('btn-txt-main-share').innerText = t.btnMainShare;
-            document.getElementById('btn-txt-main-qr').innerText = t.btnMainQr;
-            document.getElementById('btn-txt-share').innerText = t.btnShare;
-            document.getElementById('btn-txt-qr').innerText = t.btnQr;
-            document.getElementById('txt-coming-soon').innerText = t.comingSoon;
-            document.getElementById('btn-close-modal').innerText = t.close;
-            document.getElementById('footer-dev').innerText = t.footerDev;
-            document.getElementById('footer-name').innerText = t.footerName;
-
-            // تحديث قائمة الفصول إذا كانت مفتوحة
-            const grade = document.getElementById('grade-select').value;
-            const currentClassVal = document.getElementById('class-select').value;
-            if (grade) {
-                updateClassOptions(currentClassVal);
-            } else {
-                document.getElementById('opt-class-default').innerText = t.optClassDisabled;
-            }
+            filteredClasses.forEach(item => {
+                const card = document.createElement('div');
+                card.className = 'timetable-card';
+                card.innerHTML = `
+                    <div class="card-header">
+                        <h3><i class="fas fa-users-class"></i> ${item.name}</h3>
+                        <span class="badge">${item.track}</span>
+                    </div>
+                    <div class="card-body">
+                        <table class="schedule-table">
+                            <thead>
+                                <tr>
+                                    <th>اليوم</th>
+                                    <th>الحصة 1</th>
+                                    <th>الحصة 2</th>
+                                    <th>الحصة 3</th>
+                                    <th>الحصة 4</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                ${weeklySchedule.map(s => `
+                                    <tr>
+                                        <td><strong>${s.day}</strong></td>
+                                        <td>${s.p1}</td>
+                                        <td>${s.p2}</td>
+                                        <td>${s.p3}</td>
+                                        <td>${s.p4}</td>
+                                    </tr>
+                                `).join('')}
+                            </tbody>
+                        </table>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
         }
 
-        function updateClassOptions(selectedClassKey = null) {
-            const grade = document.getElementById('grade-select').value;
-            const classSelect = document.getElementById('class-select');
-            const scheduleBox = document.getElementById('schedule-box');
-            const t = translations[currentLang];
-
-            classSelect.innerHTML = `<option value="">${t.optClassDefault}</option>`;
-            scheduleBox.style.display = 'none';
-
-            if (!grade) {
-                classSelect.disabled = true;
-                return;
-            }
-
-            classSelect.disabled = false;
-
-            const nameList = (currentLang === 'en' && grade === "2") ? t.classNames2 : t.classNames;
-
-            nameList.forEach((name, index) => {
-                const opt = document.createElement('option');
-                opt.value = `${grade}-${index + 1}`;
-                opt.textContent = currentLang === 'ar' ? `فصل ${name}` : `Class ${name}`;
-                classSelect.appendChild(opt);
+        // دالة تصفية الفصول عند النقر على الأزرار
+        function filterClass(classId) {
+            document.querySelectorAll('.class-btn').forEach(btn => {
+                btn.classList.remove('active');
             });
 
-            if (selectedClassKey) {
-                classSelect.value = selectedClassKey;
-                showSchedule();
-            }
+            event.currentTarget.classList.add('active');
+            renderTimetables(classId);
         }
 
-        function showSchedule() {
-            const classKey = document.getElementById('class-select').value;
-            const classSelect = document.getElementById('class-select');
-            const scheduleBox = document.getElementById('schedule-box');
-            const comingSoonBox = document.getElementById('coming-soon');
-            const scheduleImg = document.getElementById('schedule-img');
-            const classTitle = document.getElementById('class-title');
-            const t = translations[currentLang];
-
-            if (!classKey) {
-                scheduleBox.style.display = 'none';
-                return;
-            }
-
-            const selectedText = classSelect.options[classSelect.selectedIndex].text;
-            const gradeVal = document.getElementById('grade-select').value;
-            const gradeText = gradeVal === "1" ? t.grade1Name : t.grade2Name;
-
-            scheduleBox.style.display = 'flex';
-
-            if (schedules[classKey] && schedules[classKey] !== "") {
-                comingSoonBox.style.display = 'none';
-                scheduleImg.src = schedules[classKey];
-                scheduleImg.style.display = 'block';
-            } else {
-                scheduleImg.style.display = 'none';
-                comingSoonBox.style.display = 'flex';
-                classTitle.innerText = `${t.title} ${gradeText} - ${selectedText}`;
-            }
-        }
-
-        function getMainURL() { return window.location.href.split('?')[0]; }
-
-        function shareMainWebsite() {
-            const mainURL = getMainURL();
-            const t = translations[currentLang];
-            if (navigator.share) {
-                navigator.share({ title: t.title, url: mainURL }).catch(() => {});
-            } else {
-                navigator.clipboard.writeText(mainURL).then(() => alert(t.alertShareMain));
-            }
-        }
-
-        function generateMainQR() {
-            const mainURL = getMainURL();
-            const qrContainer = document.getElementById('qrcode');
-            const t = translations[currentLang];
-            
-            qrContainer.innerHTML = '';
-            document.getElementById('qr-title').innerText = t.qrMainTitle;
-
-            new QRCode(qrContainer, { text: mainURL, width: 180, height: 180, colorDark : "#0f172a", colorLight : "#ffffff" });
-            document.getElementById('qr-modal').style.display = 'flex';
-        }
-
-        function getClassURL() {
-            return `${getMainURL()}?class=${document.getElementById('class-select').value}`;
-        }
-
-        function shareClassLink() {
-            const shareURL = getClassURL();
-            const t = translations[currentLang];
-            const selectedText = document.getElementById('class-select').options[document.getElementById('class-select').selectedIndex].text;
-
-            if (navigator.share) {
-                navigator.share({ title: selectedText, url: shareURL }).catch(() => {});
-            } else {
-                navigator.clipboard.writeText(shareURL).then(() => alert(t.alertShareClass));
-            }
-        }
-
-        function generateQR() {
-            const shareURL = getClassURL();
-            const t = translations[currentLang];
-            const selectedText = document.getElementById('class-select').options[document.getElementById('class-select').selectedIndex].text;
-            const qrContainer = document.getElementById('qrcode');
-            
-            qrContainer.innerHTML = '';
-            document.getElementById('qr-title').innerText = `${t.qrClassTitlePrefix}${selectedText}`;
-
-            new QRCode(qrContainer, { text: shareURL, width: 180, height: 180, colorDark : "#0f172a", colorLight : "#ffffff" });
-            document.getElementById('qr-modal').style.display = 'flex';
-        }
-
-        function closeQRModal() {
-            document.getElementById('qr-modal').style.display = 'none';
-        }
-
-        window.onload = function() {
-            const urlParams = new URLSearchParams(window.location.search);
-            const classParam = urlParams.get('class');
-
-            if (classParam) {
-                const grade = classParam.split('-')[0];
-                if (grade === "1" || grade === "2") {
-                    document.getElementById('grade-select').value = grade;
-                    updateClassOptions(classParam);
-                }
-            }
+        // تشغيل الرندر الأولي عند تحميل الصفحة
+        window.onload = () => {
+            renderTimetables('all');
         };
     </script>
 </body>
