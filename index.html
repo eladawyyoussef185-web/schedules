@@ -12,6 +12,8 @@
     <!-- الخطوط والأيقونات -->
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- مكتبة توليد الـ QR Code مباشرة -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     
     <style>
         :root {
@@ -125,25 +127,54 @@
         .principal-text span { font-size: 0.8rem; color: var(--text-muted); display: block; }
         .principal-text strong { font-size: 1.15rem; color: var(--text-light); font-weight: 900; }
 
-        /* زرار الشير الفخم */
-        .share-btn {
+        /* الأزرار العلوية */
+        .action-btn {
             background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan));
             color: #fff;
             border: none;
-            padding: 12px 22px;
+            padding: 12px 20px;
             border-radius: var(--radius-lg);
             font-weight: 800;
-            font-size: 1rem;
+            font-size: 0.95rem;
             cursor: pointer;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
             box-shadow: var(--shadow-glow);
             transition: all 0.3s ease;
         }
-        .share-btn:hover {
+        .action-btn:hover {
             transform: translateY(-2px);
             opacity: 0.9;
+        }
+
+        /* نافذة الـ QR Code منبثقة أو مدمجة */
+        .qr-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: var(--radius-xl);
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+            text-align: center;
+        }
+        .qr-box {
+            background: #fff;
+            padding: 12px;
+            border-radius: 14px;
+            margin-top: 12px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+            display: inline-block;
+        }
+        .qr-section p {
+            color: var(--accent-cyan);
+            font-weight: 800;
+            font-size: 1.1rem;
+            margin-bottom: 5px;
         }
 
         /* تصفية الفصول */
@@ -309,8 +340,8 @@
             </div>
 
             <div class="header-actions">
-                <button class="share-btn" onclick="shareWebsite()">
-                    <i class="fas fa-share-alt"></i> مشاركة الجدول
+                <button class="action-btn" onclick="shareWebsite()">
+                    <i class="fas fa-share-alt"></i> مشاركة
                 </button>
                 <div class="principal-badge">
                     <i class="fas fa-user-tie"></i>
@@ -321,6 +352,12 @@
                 </div>
             </div>
         </header>
+
+        <!-- قسم QR Code السريع -->
+        <div class="qr-section">
+            <p><i class="fas fa-qrcode"></i> امسح الكود لفتح الجدول مباشرة على هاتفك المحمول:</p>
+            <div class="qr-box" id="qrcode"></div>
+        </div>
 
         <div class="controls-panel">
             <div class="panel-title">
@@ -511,7 +548,7 @@
             renderTimetables(classId);
         }
 
-        /* دالة مشاركة الموقع عبر واجهة المتصفح */
+        /* دالة مشاركة الموقع */
         function shareWebsite() {
             if (navigator.share) {
                 navigator.share({
@@ -525,8 +562,20 @@
             }
         }
 
+        /* توليد الـ QR Code تلقائياً لرابط الموقع الحالي */
         window.onload = () => {
             renderTimetables('all');
+            
+            // توليد الـ QR Code بناءً على رابط الموقع
+            document.getElementById("qrcode").innerHTML = "";
+            new QRCode(document.getElementById("qrcode"), {
+                text: window.location.href,
+                width: 130,
+                height: 130,
+                colorDark: "#0b132b",
+                colorLight: "#ffffff",
+                correctLevel: QRCode.CorrectLevel.H
+            });
         };
     </script>
 </body>
