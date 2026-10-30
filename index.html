@@ -9,9 +9,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
-        /* =========================================================
-           1. المتغيرات والتنسيقات الأساسية (CSS Variables & Resets)
-           ========================================================= */
         :root {
             --bg-primary: #0b132b;
             --bg-secondary: #1c2541;
@@ -20,10 +17,10 @@
             --accent-cyan: #06b6d4;
             --text-light: #f8fafc;
             --text-muted: #94a3b8;
-            --card-bg: rgba(30, 41, 59, 0.75);
-            --card-border: rgba(255, 255, 255, 0.1);
+            --card-bg: rgba(30, 41, 59, 0.85);
+            --card-border: rgba(255, 255, 255, 0.12);
             --radius-xl: 20px;
-            --radius-lg: 14px;
+            --radius-lg: 12px;
             --shadow-glow: 0 10px 30px rgba(59, 130, 246, 0.2);
             --font-family: 'Cairo', sans-serif;
         }
@@ -43,131 +40,106 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 25px 15px;
+            padding: 20px 10px;
             overflow-x: hidden;
         }
 
         .container {
             width: 100%;
-            max-width: 1280px;
+            max-width: 1400px;
             margin: 0 auto;
         }
 
-        /* =========================================================
-           2. الهيدر والشعار (Header Section)
-           ========================================================= */
+        /* الهيدر الرئيسي */
         header {
             width: 100%;
             background: rgba(28, 37, 65, 0.85);
             backdrop-filter: blur(14px);
             border: 1px solid var(--card-border);
             border-radius: var(--radius-xl);
-            padding: 25px 35px;
-            margin-bottom: 25px;
+            padding: 20px 30px;
+            margin-bottom: 20px;
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
             display: flex;
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
-            gap: 20px;
+            gap: 15px;
         }
 
         .school-brand {
             display: flex;
             align-items: center;
-            gap: 20px;
+            gap: 18px;
         }
 
         .school-logo {
-            width: 70px;
-            height: 70px;
+            width: 65px;
+            height: 65px;
             background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan));
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 2.2rem;
+            font-size: 2rem;
             color: #fff;
             box-shadow: var(--shadow-glow);
         }
 
         .school-info h1 {
-            font-size: 1.7rem;
+            font-size: 1.6rem;
             font-weight: 900;
             color: var(--text-light);
-            line-height: 1.3;
         }
 
         .school-info p {
-            font-size: 1rem;
+            font-size: 0.95rem;
             color: var(--accent-gold);
             font-weight: 700;
-            margin-top: 4px;
         }
 
         .principal-badge {
             background: rgba(245, 158, 11, 0.1);
             border: 1px solid rgba(245, 158, 11, 0.3);
-            padding: 12px 22px;
+            padding: 10px 20px;
             border-radius: var(--radius-lg);
             display: flex;
             align-items: center;
-            gap: 14px;
+            gap: 12px;
         }
 
-        .principal-badge i {
-            font-size: 1.5rem;
-            color: var(--accent-gold);
-        }
+        .principal-badge i { font-size: 1.4rem; color: var(--accent-gold); }
+        .principal-text span { font-size: 0.8rem; color: var(--text-muted); display: block; }
+        .principal-text strong { font-size: 1.05rem; color: var(--text-light); font-weight: 800; }
 
-        .principal-text {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .principal-text span {
-            font-size: 0.8rem;
-            color: var(--text-muted);
-        }
-
-        .principal-text strong {
-            font-size: 1.1rem;
-            color: var(--text-light);
-            font-weight: 800;
-        }
-
-        /* =========================================================
-           3. لوحة تصفية الفصول (Class Filter Controls)
-           ========================================================= */
+        /* التحكم في التصفية */
         .controls-panel {
             width: 100%;
             background: var(--card-bg);
-            backdrop-filter: blur(12px);
             border: 1px solid var(--card-border);
             border-radius: var(--radius-xl);
-            padding: 22px;
-            margin-bottom: 25px;
+            padding: 18px;
+            margin-bottom: 20px;
             display: flex;
             flex-direction: column;
-            gap: 15px;
+            gap: 12px;
             align-items: center;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
         }
 
         .panel-title {
-            font-size: 1.25rem;
+            font-size: 1.15rem;
             font-weight: 800;
             color: var(--accent-cyan);
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
         }
 
         .class-selector-group {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 10px;
+            gap: 8px;
             width: 100%;
         }
 
@@ -175,93 +147,41 @@
             background: rgba(15, 23, 42, 0.7);
             color: var(--text-light);
             border: 1px solid var(--card-border);
-            padding: 10px 22px;
+            padding: 8px 18px;
             border-radius: var(--radius-lg);
             font-weight: 700;
-            font-size: 1rem;
+            font-size: 0.95rem;
             cursor: pointer;
             transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 8px;
         }
 
-        .class-btn:hover {
-            border-color: var(--accent-blue);
-            transform: translateY(-2px);
-            background: rgba(59, 130, 246, 0.25);
-        }
-
-        .class-btn.active {
+        .class-btn:hover, .class-btn.active {
             background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan));
             border-color: transparent;
-            box-shadow: var(--shadow-glow);
             color: #fff;
+            box-shadow: var(--shadow-glow);
         }
 
-        /* =========================================================
-           4. إعلانات المدرسة والتنبيهات (Notice Board)
-           ========================================================= */
-        .notice-board {
-            width: 100%;
-            background: rgba(245, 158, 11, 0.08);
-            border: 1px solid rgba(245, 158, 11, 0.25);
-            border-radius: var(--radius-xl);
-            padding: 20px 25px;
-            margin-bottom: 30px;
-            display: flex;
-            align-items: center;
-            gap: 20px;
-        }
-
-        .notice-icon {
-            font-size: 2.2rem;
-            color: var(--accent-gold);
-        }
-
-        .notice-content h4 {
-            font-size: 1.15rem;
-            font-weight: 800;
-            color: var(--accent-gold);
-            margin-bottom: 4px;
-        }
-
-        .notice-content p {
-            font-size: 0.95rem;
-            color: var(--text-light);
-            line-height: 1.6;
-        }
-
-        /* =========================================================
-           5. شبكة عرض الجداول الدراسية (Timetable Section)
-           ========================================================= */
+        /* عرض كروت الجداول */
         .timetable-section {
             width: 100%;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 25px;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
             margin-bottom: 40px;
         }
 
         .timetable-card {
             background: var(--card-bg);
-            backdrop-filter: blur(12px);
             border: 1px solid var(--card-border);
             border-radius: var(--radius-xl);
             overflow: hidden;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.35);
-        }
-
-        .timetable-card:hover {
-            transform: translateY(-6px);
-            border-color: var(--accent-cyan);
-            box-shadow: 0 20px 45px rgba(6, 182, 212, 0.25);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.4);
         }
 
         .card-header {
-            background: linear-gradient(90deg, rgba(59, 130, 246, 0.22), rgba(6, 182, 212, 0.22));
-            padding: 18px 22px;
+            background: linear-gradient(90deg, rgba(59, 130, 246, 0.25), rgba(6, 182, 212, 0.25));
+            padding: 15px 20px;
             border-bottom: 1px solid var(--card-border);
             display: flex;
             justify-content: space-between;
@@ -269,92 +189,71 @@
         }
 
         .card-header h3 {
-            font-size: 1.35rem;
+            font-size: 1.3rem;
             font-weight: 900;
             color: var(--accent-cyan);
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .card-header .badge {
-            background: rgba(245, 158, 11, 0.2);
-            color: var(--accent-gold);
-            padding: 5px 14px;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: 700;
         }
 
         .card-body {
-            padding: 20px;
+            padding: 15px;
+            overflow-x: auto;
         }
 
+        /* تصميم الجدول والتنسيق المحسن للمواد والمعلمين */
         .schedule-table {
             width: 100%;
             border-collapse: collapse;
+            min-width: 750px;
         }
 
         .schedule-table th, .schedule-table td {
-            padding: 12px 10px;
-            text-align: right;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-            font-size: 0.95rem;
+            padding: 12px 8px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            font-size: 0.9rem;
         }
 
         .schedule-table th {
-            color: var(--text-muted);
-            font-weight: 700;
-            font-size: 0.85rem;
-            background: rgba(15, 23, 42, 0.4);
-        }
-
-        .schedule-table td strong {
-            color: var(--text-light);
+            background: rgba(15, 23, 42, 0.6);
+            color: var(--accent-gold);
             font-weight: 800;
         }
 
-        .sub-text {
-            display: block;
-            font-size: 0.8rem;
-            color: var(--accent-gold);
-            margin-top: 3px;
+        .cell-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
         }
 
-        /* =========================================================
-           6. الفوتر والتوثيق (Footer)
-           ========================================================= */
+        .subject-title {
+            font-weight: 800;
+            color: #ffffff;
+            font-size: 0.95rem;
+        }
+
+        .teacher-name {
+            font-size: 0.8rem;
+            color: var(--accent-cyan);
+            font-weight: 600;
+            background: rgba(6, 182, 212, 0.1);
+            padding: 2px 8px;
+            border-radius: 6px;
+        }
+
         footer {
-            width: 100%;
             margin-top: auto;
-            padding: 30px 0;
+            padding: 25px 0;
             border-top: 1px solid var(--card-border);
             text-align: center;
             color: var(--text-muted);
-            font-size: 0.95rem;
-            line-height: 1.8;
+            font-size: 0.9rem;
         }
 
         footer .developer {
             color: var(--accent-cyan);
             font-weight: 900;
             font-family: monospace;
-            font-size: 1.15rem;
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            header {
-                flex-direction: column;
-                text-align: center;
-            }
-            .school-brand {
-                flex-direction: column;
-            }
-            .principal-badge {
-                width: 100%;
-                justify-content: center;
-            }
         }
     </style>
 </head>
@@ -362,15 +261,12 @@
 
     <div class="container">
 
-        <!-- الهيدر الرئيسي بمعلومات المدرسة ومديرتها أ/ ولاء حسين -->
         <header>
             <div class="school-brand">
-                <div class="school-logo">
-                    <i class="fas fa-graduation-cap"></i>
-                </div>
+                <div class="school-logo"><i class="fas fa-graduation-cap"></i></div>
                 <div class="school-info">
                     <h1>مدرسة الأورمان الرسمية للغات</h1>
-                    <p><i class="fas fa-calendar-alt"></i> جداول الحصص الأسبوعية - الصف الثاني الثانوي</p>
+                    <p><i class="fas fa-calendar-alt"></i> جدول الحصص الأسبوعي الكامل - الصف الثاني الثانوي</p>
                 </div>
             </div>
 
@@ -383,17 +279,14 @@
             </div>
         </header>
 
-        <!-- لوحة التحكم وتصفية الفصول -->
         <div class="controls-panel">
             <div class="panel-title">
                 <i class="fas fa-filter"></i>
-                <span>اختر الفصل الدراسي لعرض جدوله المعتمد:</span>
+                <span>اختر الفصل لعرض الجدول الدراسي المعتمد:</span>
             </div>
 
             <div class="class-selector-group">
-                <button class="class-btn active" onclick="filterClass('all')">
-                    <i class="fas fa-th-large"></i> جميع الفصول
-                </button>
+                <button class="class-btn active" onclick="filterClass('all')">جميع الفصول</button>
                 <button class="class-btn" onclick="filterClass('2-1')">فصل 2 / 1</button>
                 <button class="class-btn" onclick="filterClass('2-2')">فصل 2 / 2</button>
                 <button class="class-btn" onclick="filterClass('2-3')">فصل 2 / 3</button>
@@ -405,125 +298,120 @@
             </div>
         </div>
 
-        <!-- لوحة التنبيهات -->
-        <div class="notice-board">
-            <div class="notice-icon">
-                <i class="fas fa-bullhorn"></i>
-            </div>
-            <div class="notice-content">
-                <h4>تنبيه هام للطلاب:</h4>
-                <p>تم اعتماد الجداول الدراسية لجميع فصول الصف الثاني الثانوي رسمياً تحت إشراف وتوجيهات مدير المدرسة <strong>أ/ ولاء حسين</strong>. يرجى المتابعة اليومية للحصص والأنشطة.</p>
-            </div>
-        </div>
+        <div class="timetable-section" id="timetable-grid"></div>
 
-        <!-- شبكة عرض الجداول لكل فصل -->
-        <div class="timetable-section" id="timetable-grid">
-            <!-- سيتم توليد الجداول هنا تلقائياً عبر الجافاسكريبت -->
-        </div>
-
-        <!-- الفوتر -->
         <footer>
             <p>جميع الحقوق محفوظة © مدرسة الأورمان الرسمية للغات</p>
-            <p>تصميم وتطوير البوابة الإلكترونية بواسطة الطالب: <span class="developer">jou</span></p>
+            <p>تم التطوير والبرمجة بواسطة الطالب: <span class="developer">jou</span></p>
         </footer>
 
     </div>
 
-    <!-- كود الجافاسكريبت المخصص للبيانات والجداول -->
     <script>
-        /* بيانات الفصول بناءً على الصور المرفقة */
+        /* كود معالجة وتوليد الخانات بحيث تكون المادة فوق واسم المدرس تحتها بالظبط */
+        function cell(subject, teacher) {
+            if (!subject || subject === '-') return '-';
+            return `
+                <div class="cell-content">
+                    <span class="subject-title">${subject}</span>
+                    ${teacher ? `<span class="teacher-name">${teacher}</span>` : ''}
+                </div>
+            `;
+        }
+
+        /* البيانات المكتملة لـ 6 حصص كاملة بناءً على الصور المرفقة */
         const classesData = [
             {
                 id: "2-1",
-                name: "فصل 2 / 1",
+                name: "فصل 2 / 1 ثانوي",
                 schedule: [
-                    { day: "الأحد", p1: "Arabic <span class='sub-text'>Taha Abdalla</span>", p2: "P.E / Financial", p3: "Financial / Eng.", p4: "Eng. / History" },
-                    { day: "الإثنين", p1: "History / Arabic", p2: "Magdy Moharam", p3: "Magdy Moharam", p4: "Ahmed Ebada" },
-                    { day: "الثلاثاء", p1: "History <span class='sub-text'>Magdy Moharam</span>", p2: "Magdy Moharam", p3: "Arabic <span class='sub-text'>Taha Abdalla</span>", p4: "Arabic / Eng." },
-                    { day: "الأربعاء", p1: "History <span class='sub-text'>Magdy Moharam</span>", p2: "Choossen 1", p3: "Choossen 1", p4: "Leadership <span class='sub-text'>Taha Abdalla</span>" },
-                    { day: "الخميس", p1: "Choossen 1", p2: "Choossen 1", p3: "Choossen 1", p4: "Eng. <span class='sub-text'>Ahmed Ebada</span>" }
+                    { day: "الأحد", p1: cell("Arabic", "Taha Abdalla"), p2: cell("P.E", "Hassan / Mona"), p3: cell("Financial Literacy", "Mohamed Sabry"), p4: cell("Eng.", "Ahmed Ebada"), p5: cell("Arabic", "Taha Abdalla"), p6: cell("-", "") },
+                    { day: "الإثنين", p1: "Arabic", p2: cell("History", "Magdy Moharam"), p3: cell("History", "Magdy Moharam"), p4: cell("Eng.", "Ahmed Ebada"), p5: cell("History", "Magdy Moharam"), p6: cell("-", "") },
+                    { day: "الثلاثاء", p1: cell("History", "Magdy Moharam"), p2: cell("History", "Magdy Moharam"), p3: cell("Arabic", "Taha Abdalla"), p4: cell("Arabic", "Taha Abdalla"), p5: cell("Eng.", "Ahmed Ebada"), p6: cell("-", "") },
+                    { day: "الأربعاء", p1: cell("History", "Magdy Moharam"), p2: cell("Choossen 1", "Nasser / Mohamed"), p3: cell("Choossen 1", "Nasser / Mohamed"), p4: cell("Leadership", "Taha Abdalla"), p5: cell("Choossen 1", "Nasser / Mohamed"), p6: cell("Arabic", "Taha Abdalla") },
+                    { day: "الخميس", p1: cell("Choossen 1", "Nasser / Mohamed"), p2: cell("Choossen 1", "Nasser / Mohamed"), p3: cell("Choossen 1", "Nasser / Mohamed"), p4: cell("Eng.", "Ahmed Ebada"), p5: cell("Financial Literacy", ""), p6: cell("-", "") }
                 ]
             },
             {
                 id: "2-2",
-                name: "فصل 2 / 2",
+                name: "فصل 2 / 2 ثانوي",
                 schedule: [
-                    { day: "الأحد", p1: "Arabic <span class='sub-text'>Atef Zaglol</span>", p2: "Financial Literacy", p3: "Eng. <span class='sub-text'>Marwa Ebrahim</span>", p4: "History <span class='sub-text'>Enas Amin</span>" },
-                    { day: "الإثنين", p1: "Eng. <span class='sub-text'>Marwa Ebrahim</span>", p2: "History <span class='sub-text'>Enas Amin</span>", p3: "Arabic <span class='sub-text'>Atef Zaglol</span>", p4: "P.E <span class='sub-text'>Hassan / Mona</span>" },
-                    { day: "الثلاثاء", p1: "Choossen 1", p2: "Choossen 1", p3: "History <span class='sub-text'>Enas Amin</span>", p4: "Arabic <span class='sub-text'>Atef Zaglol</span>" },
-                    { day: "الأربعاء", p1: "Arabic <span class='sub-text'>Atef Zaglol</span>", p2: "Arabic <span class='sub-text'>Atef Zaglol</span>", p3: "History <span class='sub-text'>Enas Amin</span>", p4: "Leadership <span class='sub-text'>Marwa Ebrahim</span>" },
-                    { day: "الخميس", p1: "Choossen 1", p2: "Choossen 1", p3: "Choossen 1", p4: "Eng. <span class='sub-text'>Marwa Ebrahim</span>" }
+                    { day: "الأحد", p1: cell("Arabic", "Atef Zaglol"), p2: cell("Financial Literacy", "Mohamed Sabry"), p3: cell("Eng.", "Marwa Ebrahim"), p4: cell("History", "Enas Amin"), p5: cell("History", "Enas Amin"), p6: cell("-", "") },
+                    { day: "الإثنين", p1: cell("Eng.", "Marwa Ebrahim"), p2: cell("History", "Enas Amin"), p3: cell("Arabic", "Atef Zaglol"), p4: cell("P.E", "Hassan / Mona"), p5: cell("Arabic", "Atef Zaglol"), p6: cell("-", "") },
+                    { day: "الثلاثاء", p1: cell("Choossen 1", "Souzan / Abd-Elkher"), p2: cell("Choossen 1", "Souzan / Abd-Elkher"), p3: cell("History", "Enas Amin"), p4: cell("Arabic", "Atef Zaglol"), p5: cell("Choossen 1", "Souzan / Abd-Elkher"), p6: cell("-", "") },
+                    { day: "الأربعاء", p1: cell("Arabic", "Atef Zaglol"), p2: cell("Arabic", "Atef Zaglol"), p3: cell("History", "Enas Amin"), p4: cell("Leadership", "Marwa Ebrahim"), p5: cell("History", "Enas Amin"), p6: cell("Eng.", "Marwa Ebrahim") },
+                    { day: "الخميس", p1: cell("Choossen 1", "Souzan / Abd-Elkher"), p2: cell("Choossen 1", "Souzan / Abd-Elkher"), p3: cell("Choossen 1", "Souzan / Abd-Elkher"), p4: cell("Eng.", "Marwa Ebrahim"), p5: cell("Financial Literacy", ""), p6: cell("-", "") }
                 ]
             },
             {
                 id: "2-3",
-                name: "fصل 2 / 3",
+                name: "فصل 2 / 3 ثانوي",
                 schedule: [
-                    { day: "الأحد", p1: "P.E <span class='sub-text'>Hassan / Mona</span>", p2: "History <span class='sub-text'>Enas Amin</span>", p3: "Arabic <span class='sub-text'>Atef Zaglol</span>", p4: "Choossen 2" },
-                    { day: "الإثنين", p1: "History <span class='sub-text'>Enas Amin</span>", p2: "Choossen 2", p3: "Financial Literacy", p4: "Arabic <span class='sub-text'>Atef Zaglol</span>" },
-                    { day: "الثلاثاء", p1: "History <span class='sub-text'>Enas Amin</span>", p2: "Choossen 2", p3: "Choossen 2", p4: "Eng. <span class='sub-text'>Ahmed Ebada</span>" },
-                    { day: "الأربعاء", p1: "History <span class='sub-text'>Enas Amin</span>", p2: "Choossen 2", p3: "Eng. <span class='sub-text'>Ahmed Ebada</span>", p4: "Leadership <span class='sub-text'>Atef Zaglol</span>" },
-                    { day: "الخميس", p1: "History <span class='sub-text'>Enas Amin</span>", p2: "History <span class='sub-text'>Enas Amin</span>", p3: "Arabic <span class='sub-text'>Atef Zaglol</span>", p4: "Arabic <span class='sub-text'>Atef Zaglol</span>" }
+                    { day: "الأحد", p1: cell("P.E", "Hassan / Mona"), p2: cell("History", "Enas Amin"), p3: cell("Arabic", "Atef Zaglol"), p4: cell("Choossen 2", "Wafa' / Bassem"), p5: cell("Choossen 2", "Wafa' / Bassem"), p6: cell("-", "") },
+                    { day: "الإثنين", p1: cell("History", "Enas Amin"), p2: cell("Choossen 2", "Wafa' / Bassem"), p3: cell("Financial Literacy", "Shaymaa said"), p4: cell("Arabic", "Atef Zaglol"), p5: cell("Eng.", "Ahmed Ebada"), p6: cell("-", "") },
+                    { day: "الثلاثاء", p1: cell("History", "Enas Amin"), p2: cell("Choossen 2", "Wafa' / Bassem"), p3: cell("Choossen 2", "Wafa' / Bassem"), p4: cell("Eng.", "Ahmed Ebada"), p5: cell("Arabic", "Atef Zaglol"), p6: cell("-", "") },
+                    { day: "الأربعاء", p1: cell("History", "Enas Amin"), p2: cell("Choossen 2", "Wafa' / Bassem"), p3: cell("Eng.", "Ahmed Ebada"), p4: cell("Leadership", "Atef Zaglol"), p5: cell("Eng.", "Ahmed Ebada"), p6: cell("Arabic", "Atef Zaglol") },
+                    { day: "الخميس", p1: cell("History", "Enas Amin"), p2: cell("History", "Enas Amin"), p3: cell("Arabic", "Atef Zaglol"), p4: cell("Arabic", "Atef Zaglol"), p5: cell("Financial Literacy", ""), p6: cell("-", "") }
                 ]
             },
             {
                 id: "2-4",
-                name: "فصل 2 / 4",
+                name: "فصل 2 / 4 ثانوي",
                 schedule: [
-                    { day: "الأحد", p1: "History <span class='sub-text'>Enas Amin</span>", p2: "Arabic <span class='sub-text'>Abd-Elrahman</span>", p3: "Eng. <span class='sub-text'>Ahmed Ebada</span>", p4: "Financial Literacy" },
-                    { day: "الإثنين", p1: "Eng. <span class='sub-text'>Ahmed Ebada</span>", p2: "Choossen 3", p3: "Choossen 3", p4: "History <span class='sub-text'>Enas Amin</span>" },
-                    { day: "الثلاثاء", p1: "Eng. <span class='sub-text'>Ahmed Ebada</span>", p2: "P.E", p3: "Arabic <span class='sub-text'>Abd-Elrahman</span>", p4: "History <span class='sub-text'>Enas Amin</span>" },
-                    { day: "الأربعاء", p1: "Eng. <span class='sub-text'>Ahmed Ebada</span>", p2: "Choossen 1", p3: "Choossen 1", p4: "Leadership" },
-                    { day: "الخميس", p1: "Choossen 1", p2: "Choossen 1", p3: "Choossen 1", p4: "History <span class='sub-text'>Enas Amin</span>" }
+                    { day: "الأحد", p1: cell("History", "Enas Amin"), p2: cell("Arabic", "Abd-Elrahman"), p3: cell("Eng.", "Ahmed Ebada"), p4: cell("Financial Literacy", "Mohamed Sabry"), p5: cell("Arabic", "Abd-Elrahman"), p6: cell("-", "") },
+                    { day: "الإثنين", p1: cell("Arabic", "Abd-Elrahman"), p2: cell("Arabic", "Abd-Elrahman"), p3: cell("Eng.", "Ahmed Ebada"), p4: cell("History", "Enas Amin"), p5: cell("Arabic", "Abd-Elrahman"), p6: cell("-", "") },
+                    { day: "الثلاثاء", p1: cell("Eng.", "Ahmed Ebada"), p2: cell("P.E", "Hassan / Mona"), p3: cell("Arabic", "Abd-Elrahman"), p4: cell("History", "Enas Amin"), p5: cell("History", "Enas Amin"), p6: cell("-", "") },
+                    { day: "الأربعاء", p1: cell("Eng.", "Ahmed Ebada"), p2: cell("Choossen 1", "Nasser / Mohamed"), p3: cell("Choossen 1", "Nasser / Mohamed"), p4: cell("Leadership", "Abd-Elrahman"), p5: cell("Choossen 1", "Nasser / Mohamed"), p6: cell("Arabic", "Abd-Elrahman") },
+                    { day: "الخميس", p1: cell("Choossen 1", "Nasser / Mohamed"), p2: cell("Choossen 1", "Nasser / Mohamed"), p3: cell("Choossen 1", "Nasser / Mohamed"), p4: cell("History", "Enas Amin"), p5: cell("Financial Literacy", ""), p6: cell("-", "") }
                 ]
             },
             {
                 id: "2-5",
-                name: "فصل 2 / 5",
+                name: "فصل 2 / 5 ثانوي",
                 schedule: [
-                    { day: "الأحد", p1: "Arabic <span class='sub-text'>Abd-Elrahman</span>", p2: "Choossen 3", p3: "Choossen 3", p4: "History <span class='sub-text'>Safaa Ahmed</span>" },
-                    { day: "الإثنين", p1: "Eng. <span class='sub-text'>Ahmed Ebada</span>", p2: "Choossen 3", p3: "Choossen 3", p4: "History <span class='sub-text'>Safaa Ahmed</span>" },
-                    { day: "الثلاثاء", p1: "Eng. <span class='sub-text'>Marwa Ebrahim</span>", p2: "Arabic <span class='sub-text'>Abd-Elrahman</span>", p3: "Financial Literacy", p4: "History <span class='sub-text'>Safaa Ahmed</span>" },
-                    { day: "الأربعاء", p1: "Arabic <span class='sub-text'>Abd-Elrahman</span>", p2: "P.E", p3: "Eng. <span class='sub-text'>Marwa Ebrahim</span>", p4: "Leadership" },
-                    { day: "الخميس", p1: "Arabic <span class='sub-text'>Abd-Elrahman</span>", p2: "Arabic <span class='sub-text'>Abd-Elrahman</span>", p3: "Choossen 3", p4: "History <span class='sub-text'>Safaa Ahmed</span>" }
+                    { day: "الأحد", p1: cell("Arabic", "Abd-Elrahman"), p2: cell("Choossen 3", "Samar A.Rahman"), p3: cell("Choossen 3", "Samar A.Rahman"), p4: cell("History", "Safaa Ahmed"), p5: cell("Eng.", "Ahmed Ebada"), p6: cell("-", "") },
+                    { day: "الإثنين", p1: cell("Eng.", "Ahmed Ebada"), p2: cell("Choossen 3", "Samar A.Rahman"), p3: cell("Choossen 3", "Samar A.Rahman"), p4: cell("History", "Safaa Ahmed"), p5: cell("Arabic", "Abd-Elrahman"), p6: cell("-", "") },
+                    { day: "الثلاثاء", p1: cell("Eng.", "Marwa Ebrahim"), p2: cell("Arabic", "Abd-Elrahman"), p3: cell("Financial Literacy", "Mohamed Nawara"), p4: cell("History", "Safaa Ahmed"), p5: cell("History", "Safaa Ahmed"), p6: cell("-", "") },
+                    { day: "الأربعاء", p1: cell("Arabic", "Abd-Elrahman"), p2: cell("P.E", "Hassan / Mona"), p3: cell("Eng.", "Marwa Ebrahim"), p4: cell("Leadership", "Safaa Ahmed"), p5: cell("Arabic", "Samar A.Rahman"), p6: cell("History", "Safaa Ahmed") },
+                    { day: "الخميس", p1: cell("Arabic", "Abd-Elrahman"), p2: cell("Arabic", "Abd-Elrahman"), p3: cell("Choossen 3", "Samar A.Rahman"), p4: cell("History", "Safaa Ahmed"), p5: cell("Financial Literacy", ""), p6: cell("-", "") }
                 ]
             },
             {
                 id: "2-6",
-                name: "فصل 2 / 6",
+                name: "فصل 2 / 6 ثانوي",
                 schedule: [
-                    { day: "الأحد", p1: "Financial Literacy", p2: "History <span class='sub-text'>Esra Ashraf</span>", p3: "Choossen 4", p4: "Arabic <span class='sub-text'>Atef Zaglol</span>" },
-                    { day: "الإثنين", p1: "Arabic <span class='sub-text'>Atef Zaglol</span>", p2: "Eng. <span class='sub-text'>Hesham A.Ghany</span>", p3: "Choossen 4", p4: "P.E <span class='sub-text'>Hassan / Mona</span>" },
-                    { day: "الثلاثاء", p1: "Arabic <span class='sub-text'>Atef Zaglol</span>", p2: "Choossen 4", p3: "History <span class='sub-text'>Esra Ashraf</span>", p4: "History <span class='sub-text'>Shaymaa said</span>" },
-                    { day: "الأربعاء", p1: "History <span class='sub-text'>Esra Ashraf</span>", p2: "History <span class='sub-text'>Esra Ashraf</span>", p3: "Eng. <span class='sub-text'>Hesham A.Ghany</span>", p4: "Leadership" },
-                    { day: "الخميس", p1: "Arabic <span class='sub-text'>Atef Zaglol</span>", p2: "Eng. <span class='sub-text'>Hesham A.Ghany</span>", p3: "History <span class='sub-text'>Shaymaa said</span>", p4: "History <span class='sub-text'>Esra Ashraf</span>" }
+                    { day: "الأحد", p1: cell("Financial Literacy", "Mohamed Sabry"), p2: cell("History", "Esra Ashraf"), p3: cell("Choossen 3", "Shaymaa said"), p4: cell("Arabic", "Atef Zaglol"), p5: cell("Eng.", "Hesham A.Ghany"), p6: cell("-", "") },
+                    { day: "الإثنين", p1: cell("Arabic", "Atef Zaglol"), p2: cell("Eng.", "Hesham A.Ghany"), p3: cell("P.E", "Hassan / Mona"), p4: cell("History", "Esra Ashraf"), p5: cell("Choossen 3", "Shaymaa said"), p6: cell("-", "") },
+                    { day: "الثلاثاء", p1: cell("Arabic", "Atef Zaglol"), p2: cell("Arabic", "Atef Zaglol"), p3: cell("History", "Esra Ashraf"), p4: cell("History", "Shaymaa said"), p5: cell("History", "Shaymaa said"), p6: cell("-", "") },
+                    { day: "الأربعاء", p1: cell("History", "Esra Ashraf"), p2: cell("History", "Esra Ashraf"), p3: cell("Eng.", "Hesham A.Ghany"), p4: cell("Leadership", "Shaymaa said"), p5: cell("History", "Atef Zaglol"), p6: cell("Arabic", "Shaymaa said") },
+                    { day: "الخميس", p1: cell("Arabic", "Atef Zaglol"), p2: cell("Eng.", "Hesham A.Ghany"), p3: cell("History", "Shaymaa said"), p4: cell("History", "Esra Ashraf"), p5: cell("Financial Literacy", ""), p6: cell("-", "") }
                 ]
             },
             {
                 id: "2-7",
-                name: "فصل 2 / 7",
+                name: "فصل 2 / 7 ثانوي",
                 schedule: [
-                    { day: "الأحد", p1: "Choossen 4", p2: "Choossen 4", p3: "Arabic <span class='sub-text'>Essam Lotfy</span>", p4: "Eng. <span class='sub-text'>Marwa Ebrahim</span>" },
-                    { day: "الإثنين", p1: "Choossen 4", p2: "Choossen 4", p3: "Arabic <span class='sub-text'>Essam Lotfy</span>", p4: "Eng. <span class='sub-text'>Marwa Ebrahim</span>" },
-                    { day: "الثلاثاء", p1: "Arabic <span class='sub-text'>Essam Lotfy</span>", p2: "Choossen 4", p3: "Choossen 4", p4: "History <span class='sub-text'>Magdy Moharam</span>" },
-                    { day: "الأربعاء", p1: "Eng. <span class='sub-text'>Marwa Ebrahim</span>", p2: "History <span class='sub-text'>Magdy Moharam</span>", p3: "P.E <span class='sub-text'>Hassan / Mona</span>", p4: "Leadership" },
-                    { day: "الخميس", p1: "Arabic <span class='sub-text'>Essam Lotfy</span>", p2: "Eng. <span class='sub-text'>Marwa Ebrahim</span>", p3: "History <span class='sub-text'>Magdy Moharam</span>", p4: "History <span class='sub-text'>Magdy Moharam</span>" }
+                    { day: "الأحد", p1: cell("Choossen 4", "Mohamed Abdelwhab"), p2: cell("Choossen 4", "Mohamed Abdelwhab"), p3: cell("Arabic", "Essam Lotfy"), p4: cell("Eng.", "Marwa Ebrahim"), p5: cell("Financial Literacy", "Mohamed Sabry"), p6: cell("-", "") },
+                    { day: "الإثنين", p1: cell("Choossen 4", "Mohamed Abdelwhab"), p2: cell("Choossen 4", "Mohamed Abdelwhab"), p3: cell("Arabic", "Essam Lotfy"), p4: cell("Eng.", "Marwa Ebrahim"), p5: cell("Arabic", "Essam Lotfy"), p6: cell("-", "") },
+                    { day: "الثلاثاء", p1: cell("Arabic", "Essam Lotfy"), p2: cell("Choossen 4", "Mohamed Abdelwhab"), p3: cell("Choossen 4", "Mohamed Abdelwhab"), p4: cell("History", "Magdy Moharam"), p5: cell("History", "Magdy Moharam"), p6: cell("-", "") },
+                    { day: "الأربعاء", p1: cell("Eng.", "Marwa Ebrahim"), p2: cell("History", "Magdy Moharam"), p3: cell("P.E", "Hassan / Mona"), p4: cell("Leadership", "Essam Lotfy"), p5: cell("History", "Magdy Moharam"), p6: cell("Arabic", "Essam Lotfy") },
+                    { day: "الخميس", p1: cell("Arabic", "Essam Lotfy"), p2: cell("Eng.", "Marwa Ebrahim"), p3: cell("History", "Magdy Moharam"), p4: cell("History", "Magdy Moharam"), p5: cell("Financial Literacy", ""), p6: cell("-", "") }
                 ]
             },
             {
                 id: "2-8",
-                name: "فصل 2 / 8",
+                name: "فصل 2 / 8 ثانوي",
                 schedule: [
-                    { day: "الأحد", p1: "Eng. <span class='sub-text'>Hesham A.Ghany</span>", p2: "History <span class='sub-text'>Abdalla Hamed</span>", p3: "History <span class='sub-text'>Abdalla Hamed</span>", p4: "Choossen 4 <span class='sub-text'>Baha' / Amr</span>" },
-                    { day: "الإثنين", p1: "Eng. <span class='sub-text'>Hesham A.Ghany</span>", p2: "History <span class='sub-text'>Abdalla Hamed</span>", p3: "Arabic <span class='sub-text'>Essam Lotfy</span>", p4: "Choossen 4" },
-                    { day: "الثلاثاء", p1: "Arabic <span class='sub-text'>Mohamed Tarek</span>", p2: "History <span class='sub-text'>Abdalla Hamed</span>", p3: "History <span class='sub-text'>Abdalla Hamed</span>", p4: "Choossen 4" },
-                    { day: "الأربعاء", p1: "Financial Literacy", p2: "Eng. <span class='sub-text'>Hesham A.Ghany</span>", p3: "Arabic <span class='sub-text'>Mohamed Tarek</span>", p4: "Leadership" },
-                    { day: "الخميس", p1: "Eng. <span class='sub-text'>Hesham A.Ghany</span>", p2: "P.E", p3: "Arabic <span class='sub-text'>Mohamed Tarek</span>", p4: "Arabic <span class='sub-text'>Mohamed Tarek</span>" }
+                    { day: "الأحد", p1: cell("Eng.", "Hesham A.Ghany"), p2: cell("History", "Abdalla Hamed"), p3: cell("History", "Abdalla Hamed"), p4: cell("Choossen 4", "Baha' said / Amr"), p5: cell("Choossen 4", "Baha' said / Amr"), p6: cell("-", "") },
+                    { day: "الإثنين", p1: cell("Eng.", "Hesham A.Ghany"), p2: cell("History", "Abdalla Hamed"), p3: cell("History", "Abdalla Hamed"), p4: cell("Choossen 4", "Baha' said / Amr"), p5: cell("Choossen 4", "Baha' said / Amr"), p6: cell("-", "") },
+                    { day: "الثلاثاء", p1: cell("Arabic", "Mohamed Tarek"), p2: cell("History", "Abdalla Hamed"), p3: cell("History", "Abdalla Hamed"), p4: cell("Choossen 4", "Baha' said / Amr"), p5: cell("Choossen 4", "Baha' said / Amr"), p6: cell("-", "") },
+                    { day: "الأربعاء", p1: cell("Financial Literacy", "Samar A.Rahman"), p2: cell("Eng.", "Hesham A.Ghany"), p3: cell("Arabic", "Mohamed Tarek"), p4: cell("Leadership", "Mohamed Tarek"), p5: cell("Arabic", "Mohamed Tarek"), p6: cell("Arabic", "Mohamed Tarek") },
+                    { day: "الخميس", p1: cell("Eng.", "Hesham A.Ghany"), p2: cell("P.E", "Hassan / Mona"), p3: cell("Arabic", "Mohamed Tarek"), p4: cell("Arabic", "Mohamed Tarek"), p5: cell("Financial Literacy", ""), p6: cell("-", "") }
                 ]
             }
         ];
 
-        /* دالة عرض وتوليد الجداول بناءً على الفلتر */
+        /* دالة الرندر لعرض الجداول بكفاءة */
         function renderTimetables(filterId = 'all') {
             const grid = document.getElementById('timetable-grid');
             grid.innerHTML = '';
@@ -538,7 +426,7 @@
                 card.innerHTML = `
                     <div class="card-header">
                         <h3><i class="fas fa-users"></i> ${item.name}</h3>
-                        <span class="badge">الثاني الثانوي</span>
+                        <span style="color:var(--accent-gold); font-weight:700;">الصف الثاني الثانوي</span>
                     </div>
                     <div class="card-body">
                         <table class="schedule-table">
@@ -549,6 +437,8 @@
                                     <th>الحصة 2</th>
                                     <th>الحصة 3</th>
                                     <th>الحصة 4</th>
+                                    <th>الحصة 5</th>
+                                    <th>الحصة 6</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -559,6 +449,8 @@
                                         <td>${s.p2}</td>
                                         <td>${s.p3}</td>
                                         <td>${s.p4}</td>
+                                        <td>${s.p5}</td>
+                                        <td>${s.p6}</td>
                                     </tr>
                                 `).join('')}
                             </tbody>
@@ -569,7 +461,6 @@
             });
         }
 
-        /* دالة تصفية فصول الصف الثاني الثانوي */
         function filterClass(classId) {
             document.querySelectorAll('.class-btn').forEach(btn => {
                 btn.classList.remove('active');
@@ -578,7 +469,6 @@
             renderTimetables(classId);
         }
 
-        /* تشغيل عرض كافة الجداول افتراضياً عند تحميل الصفحة */
         window.onload = () => {
             renderTimetables('all');
         };
